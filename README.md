@@ -1,3 +1,7 @@
+https://weatherstack.com/
+https://airport-web.appspot.com/api/docs/
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
