@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   display: flex;
@@ -6,19 +8,17 @@ html, body, #root {
   align-items: center;
   text-align: center;
 }
-
 .app {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  text-align: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
 }
 
 .container {
-  max-width: 600px;
-  width: 100%;
+  text-align: center;
 }
 
 .app-header h1 {
@@ -30,6 +30,20 @@ html, body, #root {
 .app-header p {
   font-size: 1.2em;
   color: #666;
+}
+
+.app-header nav {
+  margin-top: 20px;
+}
+
+.app-header nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.app-header nav a:hover {
+  text-decoration: underline;
 }
 
 .app-main {
@@ -49,22 +63,66 @@ html, body, #root {
   cursor: pointer;
 }
 
-.auth-container {
+.search-results {
   margin-top: 20px;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.search-results h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.search-results p {
+  font-size: 1em;
+  color: #333;
+}
+
+.search-results a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.search-results a:hover {
+  text-decoration: underline;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .auth-container input {
-  display: block;
-  margin: 10px auto;
   padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
   font-size: 16px;
-  width: 80%;
 }
 
 .auth-container button {
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  width: 84%;
-  margin: 10px auto;
 }
