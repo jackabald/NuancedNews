@@ -1,12 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import SearchBar from "./components/SearchBar.jsx";
 import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
+import Dropdown from "./components/Dropdown.jsx";
+import { fetchNews } from "./services/newsService";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
+  const [cnnArticles, setCnnArticles] = useState([]);
+  const [bbcArticles, setBbcArticles] = useState([]);
+  const [foxArticles, setFoxArticles] = useState([]);
+
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const data = await fetchNews();
+        setCnnArticles(
+          data.filter(
+            (article) => article.source === "CNN.com - RSS Channel - World"
+          )
+        );
+        setBbcArticles(data.filter((article) => article.source === "BBC News"));
+        setFoxArticles(
+          data.filter(
+            (article) => article.source === "Latest & Breaking News on Fox News"
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
+
+    getNews();
+  }, []);
 
   const handleSearch = (articles) => {
     setSearchResults(articles);
@@ -31,6 +59,20 @@ function App() {
                 element={
                   <>
                     <SearchBar onSearch={handleSearch} />
+                    <div className="dropdown-container">
+                      <Dropdown
+                        label="CNN (Left Leaning)"
+                        articles={cnnArticles}
+                      />
+                      <Dropdown
+                        label="BBC News (Left Leaning)"
+                        articles={bbcArticles}
+                      />
+                      <Dropdown
+                        label="Fox News (Right Leaning)"
+                        articles={foxArticles}
+                      />
+                    </div>
                     {searchResults.length > 0 && (
                       <div className="search-results">
                         <h2>Search Results</h2>
