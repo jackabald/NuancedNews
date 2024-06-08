@@ -1,9 +1,23 @@
-# React + Vite
+# Nuanced News
+Nuanced News is a web application that aggregates current news stories from around the web. It outlines left-leaning and right-leaning bias and allows readers to get the WHOLE story.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+- User Authentication
+- News Aggregation
+- Bias Categorization
+- Real-time updates
+- Article search using free News API
+  
+## How it Works
+Large news publications post their .rss files, which are XML files that contain the latest news articles from the publication. The Nuanced News app fetches these .rss files from various sources, parses the XML to extract article information, and categorizes the articles based on their source's political bias.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
+## Technologies Used
+- ### Frontend:
+* React
+* Vite
+* Axios
+- ### Backend:
+* Flask
+* Python
+- ### Others:
+* Firebase (User Auth and Firestore)
