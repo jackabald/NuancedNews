@@ -23,3 +23,14 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Ignore virtual environment
+venv/
+
+# Ignore RSS feed data
+rss_feed.json
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.env
