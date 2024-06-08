@@ -4,7 +4,6 @@ Nuanced News is a web application that aggregates current news stories from arou
 ## Features
 - User Authentication
 - News Aggregation
-- Bias Categorization
 - Real-time updates
 - Article search using free News API
   
