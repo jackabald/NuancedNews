@@ -12,6 +12,7 @@ function App() {
   const [cnnArticles, setCnnArticles] = useState([]);
   const [bbcArticles, setBbcArticles] = useState([]);
   const [foxArticles, setFoxArticles] = useState([]);
+  const [wsjArticles, setWsjArticles] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
@@ -27,6 +28,9 @@ function App() {
           data.filter(
             (article) => article.source === "Latest & Breaking News on Fox News"
           )
+        );
+        setWsjArticles(
+          data.filter((article) => article.source === "WSJ.com: World News")
         );
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -65,11 +69,15 @@ function App() {
                         articles={cnnArticles}
                       />
                       <Dropdown
-                        label="BBC News (Left Leaning)"
+                        label="BBC (Left Leaning)"
                         articles={bbcArticles}
                       />
                       <Dropdown
-                        label="Fox News (Right Leaning)"
+                        label="WSJ (Right Leaning)"
+                        articles={wsjArticles}
+                      />
+                      <Dropdown
+                        label="Fox (Right Leaning)"
                         articles={foxArticles}
                       />
                     </div>
