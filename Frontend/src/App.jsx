@@ -9,28 +9,44 @@ import { fetchNews } from "./services/newsService";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
-  const [cnnArticles, setCnnArticles] = useState([]);
-  const [bbcArticles, setBbcArticles] = useState([]);
-  const [foxArticles, setFoxArticles] = useState([]);
-  const [wsjArticles, setWsjArticles] = useState([]);
+  const [cnn, setCnn] = useState([]);
+  const [bbc, setBbc] = useState([]);
+  const [fox, setFox] = useState([]);
+  const [wsj, setWsj] = useState([]);
+  const [dw, setDw] = useState([]);
+  const [ny, setNy] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
       try {
         const data = await fetchNews();
-        setCnnArticles(
+        setCnn(
           data.filter(
             (article) => article.source === "CNN.com - RSS Channel - World"
           )
         );
-        setBbcArticles(data.filter((article) => article.source === "BBC News"));
-        setFoxArticles(
+        setBbc(data.filter((article) => article.source === "BBC News"));
+        setFox(
           data.filter(
             (article) => article.source === "Latest & Breaking News on Fox News"
           )
         );
-        setWsjArticles(
+        setWsj(
           data.filter((article) => article.source === "WSJ.com: World News")
+        );
+        setDw(
+          data.filter(
+            (article) =>
+              article.source ===
+              "The Daily Wire - Breaking News, Videos & Podcasts"
+          )
+        );
+        setNy(
+          data.filter(
+            (article) =>
+              article.source ===
+              "News, Politics, Opinion, Commentary, and Analysis"
+          )
         );
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -49,7 +65,7 @@ function App() {
       <div className="app">
         <div className="container">
           <header className="app-header">
-            <h1>News Explorer</h1>
+            <h1>Nuanced News</h1>
             <p>Get well-rounded news articles from various sources</p>
             <nav>
               <Link to="/">Home</Link> | <Link to="/signin">Sign In</Link> |{" "}
@@ -64,22 +80,12 @@ function App() {
                   <>
                     <SearchBar onSearch={handleSearch} />
                     <div className="dropdown-container">
-                      <Dropdown
-                        label="CNN (Left Leaning)"
-                        articles={cnnArticles}
-                      />
-                      <Dropdown
-                        label="BBC (Left Leaning)"
-                        articles={bbcArticles}
-                      />
-                      <Dropdown
-                        label="WSJ (Right Leaning)"
-                        articles={wsjArticles}
-                      />
-                      <Dropdown
-                        label="Fox (Right Leaning)"
-                        articles={foxArticles}
-                      />
+                      <Dropdown label="CNN" articles={cnn} />
+                      <Dropdown label="BBC" articles={bbc} />
+                      <Dropdown label="WSJ" articles={wsj} />
+                      <Dropdown label="Fox" articles={fox} />
+                      <Dropdown label="The Daily Wire" articles={dw} />
+                      <Dropdown label="The New Yorker" articles={ny} />
                     </div>
                     {searchResults.length > 0 && (
                       <div className="search-results">
