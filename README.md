@@ -18,7 +18,6 @@ Large news publications post their .rss files, which are XML files that contain 
 - ### Backend:
 * Flask
 * Python
-- ### Others:
 * Firebase (User Auth and Firestore)
 
 ## Installation and Setup
