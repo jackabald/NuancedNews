@@ -38,7 +38,7 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
-- Create a .env file in the backend directory to hold all of your environment variables (Firebase)
+- Create a .env file in the backend directory to hold all of your environment variables 
 - Start the Flash server:
 ```bash
 python app.py
@@ -51,6 +51,15 @@ cd Frontend
 - Install required node packages:
 ```bash
 npm install
+```
+- Create a .env file in the frontend directory to hold all of your environment variables for Firebase Web SDK:
+```
+VITE_API_KEY=your_firebase_api_key
+VITE_AUTH_DOMAIN=your_firebase_auth_domain
+VITE_PROJECT_ID=your_firebase_project_id
+VITE_STORAGE_BUCKET=your_firebase_storage_bucket
+VITE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+VITE_APP_ID=your_firebase_app_id
 ```
 - Start development server:
 ```bash
