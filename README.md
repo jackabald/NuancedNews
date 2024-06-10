@@ -28,7 +28,7 @@ git clone https://github.com/jackabald/NuancedNews.git
 cd NuancedNews
 ```
 ### 2. Backend Setup
-- Navigate to the backend directory and setup a virtual environment
+- Navigate to the backend directory and setup a virtual environment:
 ```bash
 cd Backend
 python -m venv venv
