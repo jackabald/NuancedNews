@@ -19,7 +19,7 @@ Large news publications post their .rss files, which are XML files that contain 
 * Flask
 * Python
 - ### Other:
-* Firebase (User Auth and Firestore)
+* Firebase (User Auth)
 
 ## Installation and Setup
 ### 1. Clone the repository
@@ -38,7 +38,6 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
-- Create a .env file in the backend directory to hold all of your environment variables 
 - Start the Flash server:
 ```bash
 python app.py
