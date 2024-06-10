@@ -20,3 +20,39 @@ Large news publications post their .rss files, which are XML files that contain 
 * Python
 - ### Others:
 * Firebase (User Auth and Firestore)
+
+## Installation and Setup
+### 1. Clone the repository
+```bash
+git clone https://github.com/jackabald/NuancedNews.git
+cd NuancedNews
+```
+### 2. Backend Setup
+- Navigate to the backend directory and setup a virtual environment
+```bash
+cd Backend
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```
+- Install the required Python packages:
+```bash
+pip install -r requirements.txt
+```
+- Create a .env file in the backend directory to hold all of your environment variables (Firebase)
+- Start the Flash server:
+```bash
+python app.py
+```
+### 3. Frontend Setup
+- Navigate to the frontend directory:
+```bash
+cd Frontend
+```
+- Install required node packages:
+```bash
+npm install
+```
+- Start development server:
+```bash
+npm run dev
+```
