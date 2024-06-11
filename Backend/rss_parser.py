@@ -39,6 +39,7 @@ if __name__ == "__main__":
         "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
         "https://www.dailywire.com/feeds/rss.xml",
         "https://www.newyorker.com/feed/news",
+        "https://thegrayzone.com/feed/",
     ]
     articles = parse_feeds(urls)
     save_to_json("rss_feed.json", articles)

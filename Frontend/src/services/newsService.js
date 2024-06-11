@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/news"; // Update with your Heroku URL if deployed
+const API_URL = "http://localhost:5000/api/news"; 
 
 export const fetchNews = async () => {
   try {
