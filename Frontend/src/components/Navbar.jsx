@@ -1,13 +1,13 @@
-import React from 'react';
-import './Navbar.css';
+import React from "react";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
     <nav className="navMenu">
       <a href="#">Home</a>
-      <a href="#">Blog</a>
-      <a href="#">Work</a>
-      <a href="#">About</a>
+      <a href="#">Profile</a>
+      <a href="#">More</a>
+      <a href="#">Why?</a>
       <div className="dot"></div>
     </nav>
   );
