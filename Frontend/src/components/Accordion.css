@@ -4,7 +4,7 @@ body{
 
 .acc-wraper{
   margin: 30px auto;
-  width:70%;
+  width:90%;
   
 }
 
@@ -13,7 +13,7 @@ body{
   flex-wrap:nowrap;
   overflow:hidden;
   width:100%;
-  height:80vh;
+  height:85vh;
 }
 
 .accordion > div{
@@ -36,3 +36,4 @@ body{
   height:100%;
   object-fit: cover;
 }
+

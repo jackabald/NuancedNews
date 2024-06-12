@@ -6,8 +6,8 @@ const Navbar = () => {
     <nav className="navMenu">
       <a href="/">Home</a>
       <a href="/profile">Profile</a>
-      <a href="#">More</a>
-      <a href="#">Why?</a>
+      <a href="/more">More</a>
+      <a href="/about">Why?</a>
       <div className="dot"></div>
     </nav>
   );
