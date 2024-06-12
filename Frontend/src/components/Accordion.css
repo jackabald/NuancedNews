@@ -17,7 +17,7 @@ body{
 }
 
 .accordion > div{
-  width:50%;
+  width:35%;
   flex-grow:1;
   flex-shrink:1;
   overflow:hidden;
@@ -36,4 +36,3 @@ body{
   height:100%;
   object-fit: cover;
 }
-

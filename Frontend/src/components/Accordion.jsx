@@ -1,15 +1,14 @@
 import React from "react";
 import "./Accordion.css";
+import Article from "./Article"
 
 const Accordion = () => {
   return (
     <div className="acc-wraper">
       <div className="accordion">
         <div>
-          <img
-            src="https://image.freepik.com/free-photo/lake-mountains_1204-507.jpg"
-            alt=""
-          ></img>
+          <h1>NYT</h1>
+          <Article />
         </div>
         <div>
           <img
