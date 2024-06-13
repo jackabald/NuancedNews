@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import SignIn from "./components/SignIn.jsx";
-import SignUp from "./components/SignUp.jsx";
 import { fetchNews } from "./services/newsService";
-import Accordion from "./components/Accordion";
 import Navbar from "./components/Navbar"
+import Accordion from "./components/Accordion";
+import Profile from "./components/Profile";
+import More from "./components/More";
+import About from "./components/About";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -63,8 +64,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Accordion />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/more" element={<More />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </Router>

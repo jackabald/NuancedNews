@@ -1,0 +1,32 @@
+.article-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .article {
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+  }
+  
+  .article h3 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .article a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  
+  .article a:hover {
+    text-decoration: underline;
+  }
