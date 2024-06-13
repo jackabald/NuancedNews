@@ -1,15 +1,23 @@
 import React from "react";
 import "./Accordion.css";
-import Article from "./Article"
+import Article from "./Article";
+import { groupNewsBySource } from "./utils";
 
-const Accordion = () => {
+
+const Accordion = ({news}) => {
+  const groupedNews = groupNewsBySource(news);
+
   return (
     <div className="acc-wraper">
       <div className="accordion">
-        <div>
-          <h1>NYT</h1>
-          <Article />
-        </div>
+        {groupedNews["NYT"] && (
+          <div>
+            <h1>NYT</h1>
+            {groupedNews["NYT"].map((article, index) => (
+              <Article key={index} {...article} />
+            ))}
+          </div>
+        )}
         <div>
           <img
             src="https://image.freepik.com/free-photo/sunlight-forest_1004-9.jpg"

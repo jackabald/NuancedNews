@@ -44,10 +44,13 @@ if __name__ == "__main__":
         "https://moxie.foxnews.com/google-publisher/politics.xml",
         "https://nypost.com/world-news/feed/",
         "https://nypost.com/politics/feed/",
+        "https://www.theguardian.com/world/rss",
+        "https://www.theguardian.com/politics/rss",
+
+        # more feeds from other publications
         "https://www.washingtonpost.com/arcio/rss/category/politics/?itid=lk_inline_manual_2",
         "https://feeds.washingtonpost.com/rss/world?itid=lk_inline_manual_35",
-        # more feeds from other publications
-        "https://feeds.npr.org/1001/rss.xml"
+        "https://feeds.npr.org/1001/rss.xml",
         "https://rss.app/feeds/adYxbhoFRWTTGEtI.xml",
         "https://feeds.bbci.co.uk/news/world/rss.xml",
         "https://www.dailywire.com/feeds/rss.xml",

@@ -9,46 +9,13 @@ import More from "./components/More";
 import About from "./components/About";
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
-  const [cnn, setCnn] = useState([]);
-  const [bbc, setBbc] = useState([]);
-  const [fox, setFox] = useState([]);
-  const [wsj, setWsj] = useState([]);
-  const [dw, setDw] = useState([]);
-  const [ny, setNy] = useState([]);
+  const[news, setNews] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
       try {
         const data = await fetchNews();
-        setCnn(
-          data.filter(
-            (article) => article.source === "CNN.com - RSS Channel - World"
-          )
-        );
-        setBbc(data.filter((article) => article.source === "BBC News"));
-        setFox(
-          data.filter(
-            (article) => article.source === "Latest & Breaking News on Fox News"
-          )
-        );
-        setWsj(
-          data.filter((article) => article.source === "WSJ.com: World News")
-        );
-        setDw(
-          data.filter(
-            (article) =>
-              article.source ===
-              "The Daily Wire - Breaking News, Videos & Podcasts"
-          )
-        );
-        setNy(
-          data.filter(
-            (article) =>
-              article.source ===
-              "News, Politics, Opinion, Commentary, and Analysis"
-          )
-        );
+        setNews(data);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -63,7 +30,7 @@ function App() {
         <div className="app">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Accordion />} />
+            <Route path="/" element={<Accordion news={news} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/more" element={<More />} />
             <Route path="/about" element={<About />} />
