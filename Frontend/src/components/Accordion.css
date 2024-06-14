@@ -4,7 +4,7 @@ body{
 
 .acc-wraper{
   margin: 30px auto;
-  width:90%;
+  width:100%;
   
 }
 
@@ -12,15 +12,15 @@ body{
   display:flex;
   flex-wrap:nowrap;
   overflow:hidden;
-  width:100%;
+  width:145vh;
   height:85vh;
 }
 
 .accordion > div{
-  width:35%;
+  width:55vh;
   flex-grow:1;
   flex-shrink:1;
-  overflow:hidden;
+  overflow:auto;
   transition:all .5s ease;
   border:5px solid aliceblue;
   border-radius:50px;
@@ -31,8 +31,3 @@ body{
   flex-shrink:0
 }
 
-.accordion div img{
-  width:100%;
-  height:100%;
-  object-fit: cover;
-}
