@@ -13,7 +13,7 @@ body{
   flex-wrap:nowrap;
   overflow:hidden;
   width: 190vh;
-  height:85vh;
+  height:83vh;
 }
 
 .accordion > div{
@@ -49,9 +49,7 @@ body{
   border: 2px solid transparent; 
   background-clip: padding-box; 
 }
-::-webkit-scrollbar-button{
-  display: none;
-}
+
 
 
 /* Firefox */
