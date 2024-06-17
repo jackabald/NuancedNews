@@ -12,7 +12,7 @@ body{
   display:flex;
   flex-wrap:nowrap;
   overflow:hidden;
-  width:145vh;
+  width: 190vh;
   height:85vh;
 }
 
@@ -30,5 +30,33 @@ body{
 
 .accordion > div:hover{
   flex-shrink:0
+}
+
+
+/*
+ *  Scrollbar
+ */
+
+/* Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+  border: 2px solid transparent; 
+  background-clip: padding-box; 
+}
+::-webkit-scrollbar-button{
+  display: none;
+}
+
+
+/* Firefox */
+* {
+  scrollbar-width: thin; 
+  scrollbar-color: grey transparent; 
 }
 
