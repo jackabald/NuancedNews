@@ -1,62 +1,77 @@
-import xmltodict
 import requests
 import json
-from typing import List, Dict
+import xml.etree.ElementTree as ET
+from bs4 import BeautifulSoup
 
-def get_rss(url: str) -> dict:
+def getRSS(url: str) -> ET.Element:
     response = requests.get(url)
-    return xmltodict.parse(response.content)
+    return ET.fromstring(response.content)
 
-def parse_feeds(urls: List[str]) -> List[Dict]:
+def parseGuardianDescription(description: str) -> str:
+    soup = BeautifulSoup(description, "html.parser")
+    cleaned_description = soup.get_text(" ", strip=True)
+    return cleaned_description
+
+def process_feed(feed_url: str, is_html: bool = False) -> list:
+    feed = getRSS(feed_url)
+    items = []
+    
+    source = feed.find(".//channel/title").text if feed.find(".//channel/title") is not None else "Unknown Source"
+    
+    for item in feed.findall(".//item"):
+        title = item.find("title")
+        link = item.find("link")
+        description = item.find("description")
+        
+        if title is not None and link is not None:
+            title_text = title.text
+            link_text = link.text
+            description_text = description.text if description is not None else ""
+            if is_html:
+                description_text = parseGuardianDescription(description_text)
+                
+            items.append({
+                "title": title_text,
+                "link": link_text,
+                "description": description_text,
+                "source": source  
+            })
+    
+    return items
+
+def main():
+    feeds = [
+        {"url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml", "is_html": False},
+        {"url": "https://feeds.a.dj.com/rss/RSSOpinion.xml", "is_html": False},
+        {"url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "is_html": False},
+        {"url": "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", "is_html": False},
+        {"url": "http://rss.cnn.com/rss/edition_world.rss", "is_html": False},
+        {"url": "http://rss.cnn.com/rss/cnn_allpolitics.rss", "is_html": False},
+        {"url": "https://moxie.foxnews.com/google-publisher/world.xml", "is_html": False},
+        {"url": "https://moxie.foxnews.com/google-publisher/politics.xml", "is_html": False},
+        {"url": "https://nypost.com/world-news/feed/", "is_html": False},
+        {"url": "https://nypost.com/politics/feed/", "is_html": False},
+        {"url": "https://www.theguardian.com/world/rss", "is_html": True},
+        {"url": "https://www.theguardian.com/politics/rss", "is_html": True},
+        {"url": "https://www.washingtonpost.com/arcio/rss/category/politics/?itid=lk_inline_manual_2", "is_html": False},
+        {"url": "https://feeds.washingtonpost.com/rss/world?itid=lk_inline_manual_35", "is_html": False},
+        {"url": "https://feeds.npr.org/1001/rss.xml", "is_html": False},
+        {"url": "https://rss.app/feeds/adYxbhoFRWTTGEtI.xml", "is_html": False},
+        {"url": "https://feeds.bbci.co.uk/news/world/rss.xml", "is_html": False},
+        {"url": "https://www.dailywire.com/feeds/rss.xml", "is_html": False},
+        {"url": "https://www.newyorker.com/feed/news", "is_html": False},
+        {"url": "https://thegrayzone.com/feed/", "is_html": True},
+        {"url": "https://www.washingtonexaminer.com/section/news/feed", "is_html": False},
+    ]
+    
     all_articles = []
-    for url in urls:
-        try:
-            data = get_rss(url)
-            for item in data['rss']['channel']['item']:
-                try:
-                    article = {
-                        "title": item.get('title', 'No title'),
-                        "description": item.get('description', 'No description'),
-                        "link": item.get('link', 'No link'),
-                        "source": data['rss']['channel']['title']
-                    }
-                    all_articles.append(article)
-                except KeyError as e:
-                    print(f"Error parsing item in {url}: {e}")
-        except Exception as e:
-            print(f"Error parsing {url}: {e}")
-    return all_articles
-
-def save_to_json(filepath: str, data: List[Dict]) -> None:
-    with open(filepath, 'w') as file:
-        json.dump(data, file, indent=4)
+    
+    for feed in feeds:
+        articles = process_feed(feed["url"], feed["is_html"])
+        all_articles.extend(articles)
+    
+    with open("rss_feed.json", "w") as file:
+        json.dump(all_articles, file, indent=4)
 
 if __name__ == "__main__":
-    urls = [
-        
-        "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
-        "https://feeds.a.dj.com/rss/RSSOpinion.xml",
-        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-        "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
-        "http://rss.cnn.com/rss/edition_world.rss",
-        "http://rss.cnn.com/rss/cnn_allpolitics.rss",
-        "https://moxie.foxnews.com/google-publisher/world.xml",
-        "https://moxie.foxnews.com/google-publisher/politics.xml",
-        "https://nypost.com/world-news/feed/",
-        "https://nypost.com/politics/feed/",
-        "https://www.theguardian.com/world/rss",
-        "https://www.theguardian.com/politics/rss",
-
-        # more feeds from other publications
-        "https://www.washingtonpost.com/arcio/rss/category/politics/?itid=lk_inline_manual_2",
-        "https://feeds.washingtonpost.com/rss/world?itid=lk_inline_manual_35",
-        "https://feeds.npr.org/1001/rss.xml",
-        "https://rss.app/feeds/adYxbhoFRWTTGEtI.xml",
-        "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://www.dailywire.com/feeds/rss.xml",
-        "https://www.newyorker.com/feed/news",
-        "https://thegrayzone.com/feed/",
-        "https://www.washingtonexaminer.com/section/news/feed",
-    ]
-    articles = parse_feeds(urls)
-    save_to_json("rss_feed.json", articles)
+    main()
