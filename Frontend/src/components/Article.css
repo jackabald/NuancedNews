@@ -1,6 +1,23 @@
+button {
+  -webkit-appearance: none;
+  outline: none;
+  border: 0;
+  background: transparent;
+}
+
+button.active::before {
+  content: "\f02e";
+  font-family: FontAwesome;
+  color: grey;
+}
+
+button::before {
+  content: "\f097";
+  font-family: FontAwesome;
+}
+
 .article-container {
   margin: 10px 0;
-
 }
 
 .article {

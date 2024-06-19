@@ -12,8 +12,8 @@ body{
   display:flex;
   flex-wrap:nowrap;
   overflow:hidden;
-  width: 190vh;
-  height:83vh;
+  width: 90%;
+  height: 90vh;
 }
 
 .accordion > div{
@@ -33,28 +33,13 @@ body{
 }
 
 
-/*
- *  Scrollbar
- */
 
-/* Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
-  width: 10px;
-  background: transparent;
+  display: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: grey;
-  border-radius: 10px;
-  border: 2px solid transparent; 
-  background-clip: padding-box; 
-}
-
-
-
-/* Firefox */
 * {
-  scrollbar-width: thin; 
-  scrollbar-color: grey transparent; 
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 }
 
