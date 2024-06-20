@@ -3,12 +3,14 @@ button {
   outline: none;
   border: 0;
   background: transparent;
+  cursor: pointer;
+  font-size: large;
 }
 
 button.active::before {
   content: "\f02e";
   font-family: FontAwesome;
-  color: grey;
+  color: red;
 }
 
 button::before {
