@@ -12,7 +12,7 @@ body {
 
 .navMenu {
   position: absolute;
-  top: 2.5%;
+  top: 1.75%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -46,21 +46,21 @@ body {
 }
 
 .navMenu a:nth-child(1):hover ~ .dot {
-  transform: translateX(-133px);
+  transform: translateX(-151px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(2):hover ~ .dot {
-  transform: translateX(-40px);
+  transform: translateX(-42px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(3):hover ~ .dot {
-  transform: translateX(57px);
+  transform: translateX(67px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(4):hover ~ .dot {
-  transform: translateX(135px);
+  transform: translateX(152px);
   opacity: 1;
 }

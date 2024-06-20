@@ -3,8 +3,7 @@ import "./Accordion.css";
 import Article from "./Article";
 import { groupNewsBySource } from "./utils";
 
-
-const Accordion = ({news}) => {
+const Accordion = ({ news }) => {
   const groupedNews = groupNewsBySource(news);
 
   return (
