@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { setUserProperties } from "firebase/analytics";
 
-function Login() {
+function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,6 +12,7 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Logged in successfully!");
+      props.onSignIn();
     } catch (error) {
       console.error("Error logging in:", error.message);
     }
@@ -40,4 +42,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignIn;

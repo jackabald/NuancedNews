@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
-function Signup() {
+function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,6 +11,7 @@ function Signup() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       alert("User created successfully!");
+      props.onSignUp();
     } catch (error) {
       console.error("Error signing up:", error.message);
     }
@@ -40,4 +41,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;
