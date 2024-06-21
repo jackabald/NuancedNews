@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { fetchNews } from "./services/newsService";
 import Navbar from "./components/Navbar"
@@ -26,6 +27,7 @@ function App() {
 
 
     return (
+      <AuthProvider>
       <Router>
         <div className="app">
           <Navbar />
@@ -37,6 +39,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      </AuthProvider>
     );
 }
 
