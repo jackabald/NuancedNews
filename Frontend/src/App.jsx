@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { fetchNews } from "./services/newsService";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
 import Accordion from "./components/Accordion";
 import Profile from "./components/Profile";
 import More from "./components/More";
 import About from "./components/About";
 
 function App() {
-  const[news, setNews] = useState([]);
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     const getNews = async () => {
@@ -25,9 +26,8 @@ function App() {
     getNews();
   }, []);
 
-
-    return (
-      <AuthProvider>
+  return (
+    <AuthProvider>
       <Router>
         <div className="app">
           <Navbar />
@@ -39,8 +39,8 @@ function App() {
           </Routes>
         </div>
       </Router>
-      </AuthProvider>
-    );
+    </AuthProvider>
+  );
 }
 
 export default App;
