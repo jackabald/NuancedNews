@@ -13,6 +13,7 @@ Large news publications post their .rss files, which are XML files that contain 
 ## Technologies Used
 - ### Frontend:
 * React
+* Bootstrap
 * Vite
 * Axios
 - ### Backend:
