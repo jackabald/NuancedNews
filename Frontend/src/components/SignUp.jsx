@@ -5,9 +5,14 @@ import { auth } from "../firebaseConfig";
 function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       alert("User created successfully!");
