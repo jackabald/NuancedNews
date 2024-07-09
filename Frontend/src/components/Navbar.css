@@ -46,21 +46,21 @@ body {
 }
 
 .navMenu a:nth-child(1):hover ~ .dot {
-  transform: translateX(-151px);
+  transform: translateX(-140px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(2):hover ~ .dot {
-  transform: translateX(-42px);
+  transform: translateX(-41px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(3):hover ~ .dot {
-  transform: translateX(67px);
+  transform: translateX(62px);
   opacity: 1;
 }
 
 .navMenu a:nth-child(4):hover ~ .dot {
-  transform: translateX(152px);
+  transform: translateX(142px);
   opacity: 1;
 }
