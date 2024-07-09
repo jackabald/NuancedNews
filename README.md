@@ -39,8 +39,9 @@ source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
-- Start the Flash server:
+- Parse RSS feeds and start the Flask server:
 ```bash
+python rss_parser.py
 python app.py
 ```
 ### 3. Frontend Setup
