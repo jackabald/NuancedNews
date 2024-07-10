@@ -1,0 +1,100 @@
+.carousel * {
+  box-sizing: border-box;
+}
+
+.carousel body {
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.carousel label {
+  background: #444;
+  color: #fff;
+  transition: transform 400ms ease-out;
+  display: inline-block;
+  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  line-height: 100vh;
+}
+
+.carousel form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  white-space: nowrap;
+}
+
+.carousel input {
+  position: absolute;
+}
+
+.carousel input:nth-of-type(1):checked ~ label:nth-of-type(1),
+.carousel input:nth-of-type(2):checked ~ label:nth-of-type(2),
+.carousel input:nth-of-type(3):checked ~ label:nth-of-type(3),
+.carousel input:nth-of-type(4):checked ~ label:nth-of-type(4) {
+  z-index: 0;
+}
+
+.carousel input:nth-of-type(1):checked ~ label {
+  transform: translate3d(0, 0, 0);
+}
+
+.carousel input:nth-of-type(2):checked ~ label {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.carousel input:nth-of-type(3):checked ~ label {
+  transform: translate3d(-200%, 0, 0);
+}
+
+.carousel input:nth-of-type(4):checked ~ label {
+  transform: translate3d(-300%, 0, 0);
+}
+
+.carousel label {
+  background: #444;
+  background-size: cover;
+  font-size: 3rem;
+}
+
+.carousel label[for="NPR"],
+.carousel label[for="TGZ"] {
+  background: #cc0000;
+}
+
+.carousel label:before,
+.carousel label:after {
+  color: white;
+  display: block;
+  font-size: 3rem;
+  height: 10rem;
+  vertical-align: middle;
+  line-height: 10rem;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.carousel label:before {
+  content: "\276D";
+  right: calc(100% + 25px);
+  position: absolute;
+}
+
+.carousel label:after {
+  content: "\276C";
+  left: calc(100% + 25px);
+  position: absolute;
+}
+
+.carousel label:hover:before,
+.carousel label:hover:after {
+  transform: translate3d(0, -50%, 0) scale(1.2);
+}
