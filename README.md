@@ -53,7 +53,7 @@ cd Frontend
 ```bash
 npm install
 ```
-- Create a .env file in the frontend directory to hold all of your environment variables for Firebase Web SDK (message me for help):
+- Create a .env file in the frontend directory to hold all of your environment variables for Firebase Web SDK:
 ```
 VITE_API_KEY=your_firebase_api_key
 VITE_AUTH_DOMAIN=your_firebase_auth_domain
