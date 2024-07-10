@@ -4,8 +4,13 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
 def getRSS(url: str) -> ET.Element:
-    response = requests.get(url)
-    return ET.fromstring(response.content)
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return ET.fromstring(response.content)
+    except (requests.RequestException, ET.ParseError) as e:
+        print(f"Error retrieving or parsing XML from {url}: {e}")
+        return None
 
 def parseGuardianDescription(description: str) -> str:
     soup = BeautifulSoup(description, "html.parser")
@@ -14,8 +19,10 @@ def parseGuardianDescription(description: str) -> str:
 
 def process_feed(feed_url: str, is_html: bool = False) -> list:
     feed = getRSS(feed_url)
-    items = []
+    if feed is None:
+        return []
     
+    items = []
     source = feed.find(".//channel/title").text if feed.find(".//channel/title") is not None else "Unknown Source"
     
     for item in feed.findall(".//item"):
@@ -68,6 +75,8 @@ def main():
     
     for feed in feeds:
         articles = process_feed(feed["url"], feed["is_html"])
+        if not articles:
+            print(f"Skipping feed {feed['url']} due to errors.")
         all_articles.extend(articles)
     
     with open("rss_feed.json", "w") as file:
