@@ -1,56 +1,100 @@
 button {
-  -webkit-appearance: none;
-  outline: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: large;
-}
-
-button.active::before {
-  content: "\f02e";
-  font-family: FontAwesome;
-  color: red;
+	-webkit-appearance: none;
+	outline: none;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	font-size: large;
+	color: black; /* Default icon color */
 }
 
 button::before {
-  content: "\f097";
-  font-family: FontAwesome;
+	content: '\f097';
+	font-family: 'FontAwesome';
+	color: inherit; /* Inherits color from the button */
 }
 
+button.red {
+	color: #ff0000; /* Changes icon color to red */
+}
+
+button.red::before {
+	content: '\f02e'; /* Changes icon to the filled bookmark */
+	font-family: 'FontAwesome';
+}
+
+/* button {
+	-webkit-appearance: none;
+	outline: none;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	font-size: large;
+}
+
+button.red {
+	color: #ff0000;
+	/* color: white; 
+	content: '\f02e';
+	font-family: FontAwesome;
+}
+
+button::before {
+	content: '\f097';
+	font-family: FontAwesome;
+} */
+
+/* button.active::before {
+	content: '\f02e';
+	font-family: FontAwesome;
+	color: red;
+} */
+/* 
+button::before {
+	content: '\f097';
+	font-family: FontAwesome;
+} */
+
 .article-container {
-  margin: 10px 0;
+	margin: 10px 0;
 }
 
 .article {
-  background: #fff;
-  padding: 20px;
-  margin: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  width: 50vh;
+	background: #fff;
+	padding: 20px;
+	margin: 10px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: left;
+	width: 50vh;
 }
 
 .article h3 {
-  margin: 0 0 10px;
-  font-size: 1.2em;
-  color: #333;
+	margin: 0 0 10px;
+	font-size: 1.2em;
+	color: #333;
 }
 
 .article p {
-  margin: 0 0 10px;
-  font-size: 1em;
-  color: #555;
+	margin: 0 0 10px;
+	font-size: 1em;
+	color: #555;
 }
 
 .article a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1em;
+	color: #007bff;
+	text-decoration: none;
+	font-size: 1em;
 }
 
 .article a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
+}
+
+.article-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
 }
