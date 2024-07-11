@@ -1,26 +1,26 @@
 button {
-  -webkit-appearance: none;
-  outline: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: large;
-  color: black; /* Default icon color */
+	-webkit-appearance: none;
+	outline: none;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	font-size: large;
+	color: black; /* Default icon color */
 }
 
 button::before {
-  content: '\f097';
-  font-family: 'FontAwesome';
-  color: inherit; /* Inherits color from the button */
+	content: '\f097';
+	font-family: 'FontAwesome';
+	color: inherit; /* Inherits color from the button */
 }
 
 button.red {
-  color: #ff0000; /* Changes icon color to red */
+	color: #ff0000; /* Changes icon color to red */
 }
 
 button.red::before {
-  content: '\f02e'; /* Changes icon to the filled bookmark */
-  font-family: 'FontAwesome';
+	content: '\f02e'; /* Changes icon to the filled bookmark */
+	font-family: 'FontAwesome';
 }
 
 /* button {
@@ -34,7 +34,7 @@ button.red::before {
 
 button.red {
 	color: #ff0000;
-	/* color: white; */
+	/* color: white; 
 	content: '\f02e';
 	font-family: FontAwesome;
 }
