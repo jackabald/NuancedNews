@@ -3,19 +3,6 @@ import './Article.css';
 import $ from 'jquery';
 
 const Article = ({ title, description, link }) => {
-	// useEffect(() => {
-	//   const handleClick = (event) => {
-	//     const btn = $(event.target);
-	//     btn.toggleClass("active");
-	//   };
-
-	//   $(".pp-bookmark-btn").on("click", handleClick);
-
-	//   return () => {
-	//     $(".pp-bookmark-btn").off("click", handleClick);
-	//   };
-	// }, []);
-
 	const [isBookmark, setIsBookmark] = useState(false);
 
 	const handleClick = () => {
