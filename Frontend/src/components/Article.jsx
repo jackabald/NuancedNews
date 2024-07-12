@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Article.css';
-import $ from 'jquery';
 
 const Article = ({ title, description, link }) => {
 	const [isBookmark, setIsBookmark] = useState(false);
@@ -20,8 +19,7 @@ const Article = ({ title, description, link }) => {
 					</a>
 					<button
 						type='button'
-						// className="pp-bookmark-btn btn btn-default btn-lg pull-right"
-						className={isBookmark ? 'red' : ''}
+						className={`bookmark-btn ${isBookmark ? 'red' : ''}`}
 						onClick={handleClick}
 						data-context='investor'
 						data-context-action='view'

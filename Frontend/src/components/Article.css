@@ -1,4 +1,4 @@
-button {
+.bookmark-btn {
 	outline: none;
 	border: 0;
 	background: transparent;
@@ -7,7 +7,7 @@ button {
 	color: black; /* Default icon color */
 }
 
-button::before {
+.bookmark-btn::before {
 	content: '\f097';
 	font-family: 'FontAwesome';
 	color: inherit; /* Inherits color from the button */
