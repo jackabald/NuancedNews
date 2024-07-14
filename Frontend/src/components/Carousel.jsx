@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import Article from "./Article";
-import "./Carousel.css";
+import { groupNewsBySource } from "./utils";
 
-const Carousel = () => {
+const Carousel = ({ news }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const groupedNews = groupNewsBySource(news);
 
   const slides = [
     {
       label: "First slide label",
       content: (
-        <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "100vh" }}
-        >
-          <div className="row">
-            <div className="col-6">
-              <Article
-                title="First slide title"
-                description="Some representative placeholder content for the first slide."
-                link="https://example.com"
-              />
+        <div className="d-flex justify-content-center">
+          {groupedNews["TGZ"] && (
+            <div>
+              {groupedNews["TGZ"].map((article, index) => (
+                <Article key={index} {...article} />
+              ))}
             </div>
-          </div>
+          )}
         </div>
       ),
     },

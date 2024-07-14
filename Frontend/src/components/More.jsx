@@ -1,15 +1,13 @@
 import React from "react";
-import Navbar from "./Navbar.jsx"
+import Navbar from "./Navbar.jsx";
 import Carousel from "./Carousel.jsx";
 
-
-const More = ({news}) => {
-
+const More = ({ news }) => {
   return (
     <div className="more">
-        <Navbar />
-        <h1>More</h1>
-        <Carousel news ={news}/>
+      <Navbar />
+      <h1>More</h1>
+      <Carousel news={news} />
     </div>
   );
 };

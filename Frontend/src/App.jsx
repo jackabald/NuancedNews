@@ -34,7 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Accordion news={news} />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/more" element={<More />} />
+            <Route path="/more" element={<More news={news} />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>
