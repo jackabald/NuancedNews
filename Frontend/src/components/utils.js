@@ -14,9 +14,9 @@ export const groupNewsBySource = (news) => {
       "Politics | The Guardian":"Gaurdian",
       // Sources for More page
       "The Grayzone":"TGZ",
-      "The Daily Wire":"Dwire",
-      "Washington Examiner":"WExam",
-      "NPR":"NPR"
+      "The Daily Wire - Breaking News, Videos & Podcasts":"Dwire",
+      "News - Washington Examiner":"Wexam",
+      "NPR Topics: News":"NPR"
     };
   
     return news.reduce((acc, article) => {

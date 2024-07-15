@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <div className="profile">
         <Navbar />
-        <h1>Profile</h1>
+        <h1 className="my-2">Profile</h1>
         {!isSignedIn &&(
         <>
         <SignIn onSignIn={() => setIsSignedIn(true)} />

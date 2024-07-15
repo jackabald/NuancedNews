@@ -23,7 +23,7 @@ h1 {
 }
 
 .accordion > div {
-  width: 55vh;
+  width: 50vh;
   flex-grow: 1;
   flex-shrink: 1;
   overflow-y: auto;

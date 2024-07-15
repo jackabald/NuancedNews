@@ -6,7 +6,7 @@ const More = ({ news }) => {
   return (
     <div className="more">
       <Navbar />
-      <h1>More</h1>
+      <h1 className="my-2">More</h1>
       <Carousel news={news} />
     </div>
   );

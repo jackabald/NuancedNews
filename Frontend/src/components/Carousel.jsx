@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Article from "./Article";
+import "./Carousel.css";
 import { groupNewsBySource } from "./utils";
 
 const Carousel = ({ news }) => {
@@ -7,33 +8,61 @@ const Carousel = ({ news }) => {
   const groupedNews = groupNewsBySource(news);
 
   const slides = [
-    {
-      label: "First slide label",
-      content: (
-        <div className="d-flex justify-content-center">
-          {groupedNews["TGZ"] && (
-            <div>
-              {groupedNews["TGZ"].map((article, index) => (
-                <Article key={index} {...article} />
-              ))}
+      {
+        label: "The Grayzone",
+        content: (
+          <div className="row justify-content-center custom-scrollable-div border">
+            {groupedNews["TGZ"] && (
+            groupedNews["TGZ"].map((article, index) => (
+              <div className="col-12 col-sm-6 col-lg-3 mb-4" key={index}>
+                <Article {...article} />
+              </div>
+      ))
+    )}
+  </div>
+        ),
+      },
+      {
+        label: "The Daily Wire",
+        content: (
+          <div className="row justify-content-center custom-scrollable-div border">
+            {groupedNews["Dwire"] && (
+            groupedNews["Dwire"].map((article, index) => (
+              <div className="col-12 col-sm-6 col-lg-3 mb-4" key={index}>
+                <Article {...article} />
+              </div>
+      ))
+    )}
+  </div>
+        ),
+      },
+      {
+        label: "The Washington Examiner",
+        content: (
+          <div className="row justify-content-center custom-scrollable-div border">
+            {groupedNews["Wexam"] && (
+            groupedNews["Wexam"].map((article, index) => (
+              <div className="col-12 col-sm-6 col-lg-3 mb-4" key={index}>
+                <Article {...article} />
+              </div>
+      ))
+    )}
+  </div>
+        ),
+      }, 
+      {
+        label: "NPR",
+        content: (<div className="row justify-content-center custom-scrollable-div border">
+          {groupedNews["NPR"] && (
+          groupedNews["NPR"].map((article, index) => (
+            <div className="col-12 col-sm-6 col-lg-3 mb-4" key={index}>
+              <Article {...article} />
             </div>
-          )}
-        </div>
-      ),
-    },
-    {
-      label: "Second slide label",
-      content: "Some representative placeholder content for the second slide.",
-    },
-    {
-      label: "Third slide label",
-      content: "Some representative placeholder content for the third slide.",
-    },
-    {
-      label: "Fourth slide label",
-      content: "Some representative placeholder content for the fourth slide.",
-    },
-  ];
+    ))
+  )}
+</div>),
+      },
+    ];
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
