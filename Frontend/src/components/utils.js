@@ -12,6 +12,11 @@ export const groupNewsBySource = (news) => {
       "Politics \u2013 Latest US Political News & Headlines | New York Post":"NYPost",
       "World news | The Guardian":"Gaurdian",
       "Politics | The Guardian":"Gaurdian",
+      // Sources for More page
+      "The Grayzone":"TGZ",
+      "The Daily Wire - Breaking News, Videos & Podcasts":"Dwire",
+      "News - Washington Examiner":"Wexam",
+      "NPR Topics: News":"NPR"
     };
   
     return news.reduce((acc, article) => {
