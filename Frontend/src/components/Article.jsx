@@ -41,9 +41,9 @@ const Article = ({ title, description, link }) => {
 				<h3>{title}</h3>
 				<p>{description}</p>
 				<div className='article-footer'>
-					<a href={link} target='_blank' rel='noopener noreferrer'>
-						Read the Article
-					</a>
+
+					<a href={link}>Read More</a>
+
 					<button
 						type='button'
 						className={`bookmark-btn ${isBookmark ? 'red' : ''}`}
