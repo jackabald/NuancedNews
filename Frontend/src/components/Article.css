@@ -24,7 +24,7 @@
   font-family: "FontAwesome";
 }
 
-.read-more-btn {
+/* .read-more-btn {
   --primary-color: #645bff;
   --secondary-color: #fff;
   --hover-color: #111;
@@ -83,25 +83,23 @@
 
 .read-more-btn:hover .arrow:before {
   right: 0;
-}
+} */
 
 /* Article div stuff */
 
 .article {
   background: #fff;
   padding: 20px;
-  margin: 10px;
+  margin: 19px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 47vh;
+  width: 45vh;
 }
 
 .article-container:hover {
-  transform: scale(1.1);
-  background-color: #f0e68c;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.07);
 }
 
 .article-container {
@@ -123,7 +121,6 @@
 
 .article-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: right;
   padding: 10px;
 }

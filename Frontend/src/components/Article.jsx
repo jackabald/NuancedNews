@@ -38,17 +38,21 @@ const Article = ({ title, description, link }) => {
   return (
     <div className="article-container">
       <div className="article">
+      <a href={link}>
         <h3>{title}</h3>
         <p>{description}</p>
+      </a>
         <div className="article-footer">
-          <a href={link}>
+
+          {/* Read More button */}
+          {/* <a href={link}>
             <button className="read-more-btn">
               Read More
               <div class="arrow-wrapper">
                 <div class="arrow"></div>
               </div>
             </button>
-          </a>
+          </a> */}
 
           <button
             type="button"
