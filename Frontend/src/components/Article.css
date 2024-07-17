@@ -24,6 +24,10 @@
   font-family: "FontAwesome";
 }
 
+.bookmark-btn:hover {
+  transform: scale(1.1);
+}
+
 /* .read-more-btn {
   --primary-color: #645bff;
   --secondary-color: #fff;
