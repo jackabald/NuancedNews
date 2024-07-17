@@ -54,6 +54,7 @@ def main():
         {"url": "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", "is_html": False},
         {"url": "http://rss.cnn.com/rss/edition_world.rss", "is_html": False},
         {"url": "http://rss.cnn.com/rss/cnn_allpolitics.rss", "is_html": False},
+        {"url": "http://rss.cnn.com/rss/cnn_latest.rss", "is_html": False},
         {"url": "https://moxie.foxnews.com/google-publisher/world.xml", "is_html": False},
         {"url": "https://moxie.foxnews.com/google-publisher/politics.xml", "is_html": False},
         {"url": "https://nypost.com/world-news/feed/", "is_html": False},
