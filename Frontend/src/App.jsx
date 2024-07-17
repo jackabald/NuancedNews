@@ -13,6 +13,7 @@ import About from "./components/About";
 function App() {
   const [news, setNews] = useState([]);
 
+  // Fetch news data
   useEffect(() => {
     const getNews = async () => {
       try {

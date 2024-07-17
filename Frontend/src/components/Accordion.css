@@ -1,4 +1,3 @@
-
 .acc-wraper {
   margin: 30px auto;
   width: 100%;
@@ -31,14 +30,15 @@
   flex-shrink: 0;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-.NYT, .CNN, .Guardian{
+/* Background colors for each news source */
+.NYT,
+.CNN,
+.Guardian {
   background-color: rgb(208, 236, 245);
 }
 
-.WSJ, .NYPost, .FOX{
+.WSJ,
+.NYPost,
+.FOX {
   background-color: rgb(253, 214, 214);
 }
