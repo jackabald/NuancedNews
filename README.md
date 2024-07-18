@@ -1,6 +1,8 @@
 # Nuanced News
-Nuanced News is a web application that aggregates current news stories from around the web. It outlines left-leaning and right-leaning bias and allows readers to get the WHOLE story.
+Nuanced News is a web application that aggregates current news stories from around the web. It outlines left-leaning and right-leaning bias and allows readers to get the WHOLE story.  
 
+  NN is open to contributors! Please star the repository if this interests you! 
+  
 ## Features
 - User Authentication
 - News Aggregation
