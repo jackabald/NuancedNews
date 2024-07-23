@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ function SignUp(props) {
       await createUserWithEmailAndPassword(auth, email, password);
       alert("User created successfully!");
       props.onSignUp();
+      navigate("/profile-details");
     } catch (error) {
       console.error("Error signing up:", error.message);
     }

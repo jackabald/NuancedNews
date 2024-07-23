@@ -7,6 +7,7 @@ import { fetchNews } from "./services/newsService";
 import Navbar from "./components/Navbar";
 import Accordion from "./components/Accordion";
 import Profile from "./components/Profile";
+import ProfileDetails from "./components/ProfileDetails";
 import More from "./components/More";
 import About from "./components/About";
 
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Accordion news={news} />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile-details" element={<ProfileDetails />} />
             <Route path="/more" element={<More news={news} />} />
             <Route path="/about" element={<About />} />
           </Routes>
