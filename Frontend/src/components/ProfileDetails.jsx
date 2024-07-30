@@ -1,11 +1,9 @@
 import React from 'react';
 
-const ProfileDetails = () => {
+const ProfileDetails = ({ user }) => {
   return (
     <div className="profile-details">
-      <h1>Your Profile</h1>
-      <p>Welcome to your personalized profile page!</p>
-      {/* Add more personalized content here */}
+      <p>{user.email}</p>
     </div>
   );
 };

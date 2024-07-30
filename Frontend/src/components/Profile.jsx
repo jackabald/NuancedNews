@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar.jsx"
-import SignIn from "./SignIn.jsx";
-import SignUp from "./SignUp.jsx";
+import React from 'react';
+import Navbar from './Navbar.jsx';
+import { useAuth } from '../contexts/AuthContext'; 
+import SignIn from './SignIn.jsx';
+import SignUp from './SignUp.jsx';
+import ProfileDetails from './ProfileDetails.jsx';
 
 const Profile = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { currentUser } = useAuth();
+
   return (
     <div className="profile">
-        <Navbar />
-        <h1>Profile</h1>
-        {!isSignedIn &&(
+      <Navbar />
+      <h1>Profile</h1>
+      {currentUser ? (
+        <ProfileDetails user={currentUser} />
+      ) : (
         <>
-        <SignIn onSignIn={() => setIsSignedIn(true)} />
-        <SignUp onSignUp={() => setIsSignedIn(true)}/>
+          <SignIn />
+          <SignUp />
         </>
-        )}
+      )}
     </div>
   );
 };
