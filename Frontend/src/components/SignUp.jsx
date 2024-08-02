@@ -1,4 +1,3 @@
-// SignUp.jsx
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
@@ -23,28 +22,37 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up">
-      <h2>Sign Up</h2>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignUp}>Sign Up</button>
-      {error && <p className="error">{error}</p>}
+    <div className="sign-up no-outline p-4">
+      <h2 className="text-center mb-4">Sign Up</h2>
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="email"
+          className="form-control mb-3"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="password"
+          className="form-control mb-3"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button className="btn btn-primary btn-block" onClick={handleSignUp}>Sign Up</button>
+      {error && <p className="text-danger mt-3">{error}</p>}
     </div>
   );
 };

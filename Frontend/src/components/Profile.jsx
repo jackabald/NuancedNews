@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar.jsx';
 import { useAuth } from '../contexts/AuthContext'; 
 import SignIn from './SignIn.jsx';
@@ -7,19 +7,27 @@ import ProfileDetails from './ProfileDetails.jsx';
 
 const Profile = () => {
   const { currentUser } = useAuth();
+  const [isSignIn, setIsSignIn] = useState(true);
+
+  const toggleForm = () => {
+    setIsSignIn(prevState => !prevState);
+  };
 
   return (
-    <div className="profile">
+    <div className="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
       <Navbar />
-      <h1>Profile</h1>
-      {currentUser ? (
-        <ProfileDetails user={currentUser} />
-      ) : (
-        <>
-          <SignIn />
-          <SignUp />
-        </>
-      )}
+      <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
+        {currentUser ? (
+          <ProfileDetails user={currentUser} />
+        ) : (
+          <>
+            {isSignIn ? <SignIn /> : <SignUp />}
+            <button className="btn btn-primary btn-block mt-3" onClick={toggleForm}>
+              {isSignIn ? 'Need an account?' : 'Already have an account?'}
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
