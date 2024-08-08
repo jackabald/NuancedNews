@@ -23,10 +23,9 @@ const Profile = () => {
       <Navbar />
       <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
         {currentUser ? (
-         <button className="btn btn-primary btn-block mt-3" onClick={logout}>
+         <><button className="btn btn-primary btn-block mt-3" onClick={logout}>
             Logout
-          </button>
-          <ProfileDetails user={currentUser} />
+          </button><ProfileDetails user={currentUser} /></>
         ) : (
           <>
             {isSignIn ? <SignIn /> : <SignUp />}
