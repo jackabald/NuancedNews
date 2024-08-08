@@ -3,7 +3,7 @@ import React from 'react';
 const ProfileDetails = ({ user }) => {
   return (
     <div className="profile-details">
-      <p>{user.email}</p>
+      <p>{user.displayName || user.email}</p>
     </div>
   );
 };

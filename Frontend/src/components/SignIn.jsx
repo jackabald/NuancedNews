@@ -1,4 +1,3 @@
-// SignIn.jsx
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
@@ -18,22 +17,28 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
-      <h2>Sign In</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignIn}>Sign In</button>
-      {error && <p className="error">{error}</p>}
+    <div className="sign-in no-outline p-4">
+      <h2 className="text-center mb-4">Sign In</h2>
+      <div className="form-group">
+        <input
+          type="email"
+          className="form-control mb-3"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="password"
+          className="form-control mb-3"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button className="btn btn-primary btn-block" onClick={handleSignIn}>Sign In</button>
+      {error && <p className="text-danger mt-3">{error}</p>}
     </div>
   );
 };
