@@ -1,6 +1,14 @@
+.newsHeader {
+  font-size: 3.0em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 .acc-wraper {
   margin: 30px auto;
-  width: 100%;
+  width: 90%;
 }
 
 .accordion {
