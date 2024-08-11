@@ -22,17 +22,17 @@
 
 .accordion > div {
   flex-grow: 1;
-  overflow-y: hidden; /* Hide vertical overflow initially */
+  overflow-y: scroll; /* Hide vertical overflow initially */
   overflow-x: hidden;
   transition: all 0.5s ease;
   border: 5px solid aliceblue;
-  border-radius: 50px;
+  border-radius: 40px;
   position: relative;
   max-height: 10vh; /* Initially, keep the height small */
 }
 
 .accordion > div:hover {
-  max-height: 100vh; /* Expand vertically on hover */
+  max-height: 90vh; 
 }
 
 /* Background colors for each news source */
