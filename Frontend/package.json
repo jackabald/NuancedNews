@@ -12,9 +12,10 @@
   "dependencies": {
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "firebase": "^10.12.2",
+    "firebase": "^10.12.5",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1"
   },

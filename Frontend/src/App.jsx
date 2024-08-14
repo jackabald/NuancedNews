@@ -5,7 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { fetchNews } from "./services/newsService";
 import Navbar from "./components/Navbar";
-import Accordion from "./components/Accordion";
+import NewsCards from "./components/NewsCards";
 import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import More from "./components/More";
@@ -34,7 +34,7 @@ function App() {
         <div className="app">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Accordion news={news} />} />
+            <Route path="/" element={<NewsCards news={news} />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile-details" element={<ProfileDetails />} />
             <Route path="/more" element={<More news={news} />} />

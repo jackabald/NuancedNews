@@ -1,95 +1,14 @@
-/* Both buttons */
-
-.bookmark-btn {
-  outline: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font-size: large;
-  color: black; /* Default icon color */
+.container-fluid {
+  margin-top: 5rem;
 }
 
-.bookmark-btn::before {
-  content: "\f097";
-  font-family: "FontAwesome";
-  color: inherit; /* Inherits color from the button */
-}
-
-.bookmark-btn.red {
-  color: #ff0000; /* Changes icon color to red */
-}
-
-.bookmark-btn.red::before {
-  content: "\f02e"; /* Changes icon to the filled bookmark */
-  font-family: "FontAwesome";
-}
-
-.bookmark-btn:hover {
-  transform: scale(1.1);
-}
-
-/* .read-more-btn {
-  --primary-color: #645bff;
-  --secondary-color: #fff;
-  --hover-color: #111;
-  --arrow-width: 10px;
-  --arrow-stroke: 2px;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 20px;
-  color: var(--secondary-color);
-  padding: 7px;
-  font-size: 12px;
-  background: var(--primary-color);
+.article-container {
+  transition: all 0.3s ease-in-out;
+  width: 100%; 
   display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  font-weight: bold;
+  justify-content: center; 
+  align-items: center; 
 }
-
-.read-more-btn .arrow-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.read-more-btn .arrow {
-  margin-top: 1px;
-  width: var(--arrow-width);
-  background: var(--primary-color);
-  height: var(--arrow-stroke);
-  position: relative;
-  transition: 0.2s;
-}
-
-.read-more-btn .arrow::before {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  border: solid var(--secondary-color);
-  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
-  display: inline-block;
-  top: -3px;
-  right: 3px;
-  transition: 0.2s;
-  padding: 3px;
-  transform: rotate(-45deg);
-}
-
-.read-more-btn:hover {
-  background-color: var(--hover-color);
-}
-
-.read-more-btn:hover .arrow {
-  background: var(--secondary-color);
-}
-
-.read-more-btn:hover .arrow:before {
-  right: 0;
-} */
-
-/* Article div stuff */
 
 .article {
   background: #fff;
@@ -99,15 +18,35 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 45vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%; 
+}
+
+.article-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.article-text {
+  flex: 1;
+  margin-right: 15px;
+  text-align: center; 
+}
+
+.article-logo {
+  width: 50%; 
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin-left: 15px;
 }
 
 .article-container:hover {
   transform: scale(1.07);
-}
-
-.article-container {
-  transition: all 0.3s ease-in-out;
 }
 
 .article h3 {
@@ -125,6 +64,45 @@
 
 .article-footer {
   display: flex;
-  justify-content: right;
+  justify-content: center; 
   padding: 10px;
+}
+
+/* Bookmark Button */
+.bookmark-btn {
+  outline: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: large;
+  color: black;
+}
+
+.bookmark-btn::before {
+  content: "\f097";
+  font-family: "FontAwesome";
+  color: inherit;
+}
+
+.bookmark-btn.red {
+  color: #ff0000; 
+}
+
+.bookmark-btn.red::before {
+  content: "\f02e"; 
+  font-family: "FontAwesome";
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.1);
+}
+
+.left-column .article {
+  border-left: 5px solid #ffb6c1; 
+  border-bottom: 5px solid #ffb6c1;
+}
+
+.right-column .article {
+  border-right: 5px solid #add8e6;
+  border-bottom: 5px solid #add8e6;
 }

@@ -1,0 +1,54 @@
+.news-section {
+  margin-bottom: 20px;
+  height: 70vh; /* Set a fixed height for the sections */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px;
+  border: 1px solid #ddd; /* Border around each news section */
+  border-radius: 10px;
+  background-color: #f9f9f9; /* Background color for sections */
+}
+
+.news-section h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.news-list {
+  max-height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling for news list */
+}
+
+.news-card {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-card .card-body {
+  padding: 15px;
+}
+
+.news-card .card-img-top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover; /* Ensure images fit within the card */
+  height: 200px; /* Fixed height for the images */
+}
+
+/* Background colors for each news source */
+.CNN .news-card {
+  background-color: rgb(208, 236, 245);
+}
+
+.NYT .news-card {
+  background-color: rgb(208, 236, 245);
+}
+
+.WSJ .news-card {
+  background-color: rgb(253, 214, 214);
+}
+
+.FOX .news-card {
+  background-color: rgb(253, 214, 214);
+}
