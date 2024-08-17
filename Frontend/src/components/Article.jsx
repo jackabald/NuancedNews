@@ -58,7 +58,7 @@ const Article = ({ title, description, link, source }) => {
           <div className="article-content">
             <div className="article-text">
               <h3>{title}</h3>
-              <p>{truncateDescription(description)}</p>
+              <p className="onhover">{truncateDescription(description)}</p>
             </div>
             <img src={getLogoUrl(source)} alt={source} className="article-logo" />
           </div>

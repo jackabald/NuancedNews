@@ -106,3 +106,11 @@
   border-right: 5px solid #add8e6;
   border-bottom: 5px solid #add8e6;
 }
+
+.onhover{
+  opacity: 0;
+}
+
+.onhover:hover{
+opacity: 100;
+}
