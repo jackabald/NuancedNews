@@ -1,0 +1,42 @@
+.why-section {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    background-color: #d9e6f0; 
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.why-image-img {
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.why-content {
+    flex: 2;
+    padding-left: 2rem;
+    text-align: left;
+}
+
+.why-content h1 {
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 1rem;
+}
+
+.why-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #495057;
+    margin-bottom: 0;
+}
