@@ -11,6 +11,7 @@ import ProfileDetails from "./components/ProfileDetails";
 import More from "./components/More";
 import About from "./components/About";
 import WhySection from "./components/WhySection";
+import HowItWorks from "./components/HowItWorks";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -41,6 +42,7 @@ function App() {
                 <>
                   <NewsCards news={news} />
                   <WhySection />
+                  <HowItWorks />
                 </>
               }
             />
