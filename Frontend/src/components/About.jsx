@@ -1,11 +1,9 @@
 import React from "react";
-import Navbar from "./Navbar.jsx"
 
 
 const About = () => {
   return (
     <div className="about">
-        <Navbar />
         <h1 className="my-2">Why?</h1>
         <h2>What's The Point?</h2>
         <p>

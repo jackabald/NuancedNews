@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar.jsx';
 import { useAuth } from '../contexts/AuthContext'; 
 import { signOut } from 'firebase/auth';
 import SignIn from './SignIn.jsx';
@@ -20,7 +19,6 @@ const Profile = () => {
 
   return (
     <div className="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
-      <Navbar />
       <div className="card shadow p-4" style={{ maxWidth: '400px', width: '100%' }}>
         {currentUser ? (
          <><button className="btn btn-primary btn-block mt-3" onClick={logout}>

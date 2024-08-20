@@ -31,18 +31,18 @@ const NewsCards = ({ news }) => {
                             </div>
                         </div>
                     )}
-                    {groupedNews["FOX"] && (
+                    {groupedNews["NYT"] && (
                         <div className="news-section">
                             <div className="logo-container">
-                                <p>FOX</p>
+                                <p>NYT</p>
                             </div>
                             <div className="news-content">
-                                <h2>FOX</h2>
+                                <h2>NYT</h2>
                                 <div className="news-list">
-                                    {groupedNews["FOX"].map((article, index) => (
+                                    {groupedNews["NYT"].map((article, index) => (
                                         <Card key={index} className="news-card">
                                             <Card.Body>
-                                                <Article {...article} source="FOX" />
+                                                <Article {...article} source="NYT" />
                                             </Card.Body>
                                         </Card>
                                     ))}

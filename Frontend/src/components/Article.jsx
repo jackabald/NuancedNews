@@ -47,7 +47,7 @@ const Article = ({ title, description, link, source }) => {
       case "FOX":
         return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Fox_News_Channel_logo.svg/1200px-Fox_News_Channel_logo.svg.png";
       default:
-        return "https://via.placeholder.com/100"; 
+        return 0; 
     }
   };
 
