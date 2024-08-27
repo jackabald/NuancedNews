@@ -15,7 +15,7 @@ const NewsCards = ({ news }) => {
                     {groupedNews["CNN"] && (
                         <div className="news-section">
                             <div className="logo-container">
-                                <p>CNN</p>
+                                <img src="src\assets\img\CNN.png" alt="CNN" />
                             </div>
                             <div className="news-content">
                                 <h2>CNN</h2>
@@ -34,7 +34,7 @@ const NewsCards = ({ news }) => {
                     {groupedNews["NYT"] && (
                         <div className="news-section">
                             <div className="logo-container">
-                                <p>NYT</p>
+                            <img src="src\assets\img\NYT.png" alt="NYT" />
                             </div>
                             <div className="news-content">
                                 <h2>NYT</h2>
@@ -57,7 +57,7 @@ const NewsCards = ({ news }) => {
                     {groupedNews["WSJ"] && (
                         <div className="news-section">
                             <div className="logo-container">
-                                <p>WSJ</p>
+                            <img src="src\assets\img\WSJ.jpg" alt="WSJ" />
                             </div>
                             <div className="news-content">
                                 <h2>WSJ</h2>
@@ -76,7 +76,7 @@ const NewsCards = ({ news }) => {
                     {groupedNews["FOX"] && (
                         <div className="news-section">
                             <div className="logo-container">
-                                <p>FOX</p>
+                            <img src="src\assets\img\FOX.png" alt="FOX" />
                             </div>
                             <div className="news-content">
                                 <h2>FOX</h2>
