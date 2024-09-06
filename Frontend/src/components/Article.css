@@ -1,108 +1,110 @@
-.container-fluid {
-  margin-top: 5rem;
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .article-container {
-  transition: all 0.3s ease-in-out;
-  width: 100%; 
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  height: 400px;
+  width: 300px;
 }
 
 .article {
-  background: #fff;
-  padding: 20px;
-  margin: 19px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  display: flex;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
-  align-items: center;
-  width: 80%; 
 }
 
 .article-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  height: 100%;
 }
 
 .article-text {
+  display: flex;
   flex: 1;
-  margin-right: 15px;
-  text-align: center; 
+  flex-direction: column;
+  gap: 5px;
+  background-color: #ffffffd7;
+  overflow: hidden;
+  max-height: 190px;
+  overflow-y: scroll;
+}
+
+.article-text h3 {
+  font-size: 18px;
+  margin: 5px;
+  color: #6398d4;
+}
+
+.article-text p {
+  font-size: 14px;
+  color: #000000;
+  margin: 5px;
+  margin-top: 0px;
 }
 
 .article-logo {
-  width: 50%; 
-  height: auto;
-  border-radius: 8px;
-  display: block;
-  margin-left: 15px;
-}
-
-.article-container:hover {
-  transform: scale(1.07);
-}
-
-.article h3 {
-  font-weight: 600;
-  margin: 0 0 10px;
-  font-size: 1.3em;
-  color: #333;
-}
-
-.article p {
-  margin: 0 0 10px;
-  font-size: 1em;
-  color: #555;
+  width: 100%;
+  height: 150px; /* Fixed height */
+  object-fit: cover;
+  margin-top: 10px;
 }
 
 .article-footer {
+  height: 40px; 
+  padding: 10px 15px;
+  border-top: 1px solid #ddd;
   display: flex;
-  justify-content: center; 
-  padding: 10px;
+  color: #000000;
+  background-color: #6a6a70;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box; /* Ensure padding is included in the height */
 }
 
-/* Bookmark Button */
 .bookmark-btn {
-  outline: none;
-  border: 0;
-  background: transparent;
+  background-color: #007bff;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: large;
-  color: black;
-}
-
-.bookmark-btn::before {
-  content: "\f097";
-  font-family: "FontAwesome";
-  color: inherit;
+  outline: none;
 }
 
 .bookmark-btn.red {
-  color: #ff0000; 
-}
-
-.bookmark-btn.red::before {
-  content: "\f02e"; 
-  font-family: "FontAwesome";
+  background-color: #ff0000;
 }
 
 .bookmark-btn:hover {
-  transform: scale(1.1);
+  background-color: #0056b3;
 }
 
-.left-column .article {
-  border-left: 5px solid #add8e6;
-  border-bottom: 5px solid #add8e6;
+.img-container img{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
-
-.right-column .article {
-  border-right: 5px solid #ffb6c1;
-  border-bottom: 5px solid #ffb6c1;
+.article a {
+height: 100%;
+padding: 5px;
+}
+.showmore{
+  font-size: 15px;
+  color: #fafcff;
+}
+.showmore:hover{
+  text-decoration: underline;
 }

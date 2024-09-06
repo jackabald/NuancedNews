@@ -9,10 +9,9 @@ import NewsCards from "./components/NewsCards";
 import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import More from "./components/More";
-import About from "./components/About";
 import WhySection from "./components/WhySection";
 import HowItWorks from "./components/HowItWorks";
-
+import Footer from "./components/Footer";
 function App() {
   const [news, setNews] = useState([]);
 
@@ -49,8 +48,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile-details" element={<ProfileDetails />} />
             <Route path="/more" element={<More news={news} />} />
-            <Route path="/about" element={<About />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
     </AuthProvider>
