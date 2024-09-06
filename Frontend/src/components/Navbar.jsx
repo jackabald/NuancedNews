@@ -24,11 +24,6 @@ const Navbar = () => {
               Profile
             </Link>
           </li>
-          <li>
-            <Link to="/about" className="text-gray-300 hover:text-white transition duration-300">
-              About
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

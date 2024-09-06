@@ -72,3 +72,6 @@ a {
 ::-webkit-scrollbar {
   display: none;
 }
+.container-fluid{
+  padding-top: 20px;
+}
