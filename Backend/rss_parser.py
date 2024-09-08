@@ -2,6 +2,7 @@ import requests
 import json
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
+from fetch_image_link import fetch_image_link
 
 def getRSS(url: str) -> ET.Element:
     try:
@@ -17,34 +18,47 @@ def parseGuardianDescription(description: str) -> str:
     cleaned_description = soup.get_text(" ", strip=True)
     return cleaned_description
 
+def extract_images_from_content(content: str) -> list:
+    soup = BeautifulSoup(content, "html.parser")
+    # Extract all image sources from img tags
+    images = [img['src'] for img in soup.find_all('img') if 'src' in img.attrs]
+    return images
+
 def process_feed(feed_url: str, is_html: bool = False) -> list:
     feed = getRSS(feed_url)
     if feed is None:
+        print(f"Failed to retrieve feed from {feed_url}")
         return []
     
     items = []
-    source = feed.find(".//channel/title").text if feed.find(".//channel/title") is not None else "Unknown Source"
+    source = feed.findtext(".//channel/title", default="Unknown Source")
     
     for item in feed.findall(".//item"):
-        title = item.find("title")
-        link = item.find("link")
-        description = item.find("description")
-        
-        if title is not None and link is not None:
-            title_text = title.text
-            link_text = link.text
-            description_text = description.text if description is not None else ""
+        title = item.findtext("title", default="No Title")
+        link = item.findtext("link", default="")
+        description = item.findtext("description", default="")
+        content_encoded = item.find("{http://purl.org/rss/1.0/modules/content/}encoded")
+        enclosure = item.find("enclosure")
+    
+        # Only process valid links
+        if link:
+            # Extract images from content:encoded if available
+            img_links = extract_images_from_content(content_encoded.text) if content_encoded is not None and content_encoded.text else []
+            img_link = img_links[0] if img_links else (enclosure.get('url') if enclosure is not None else fetch_image_link(link))
+            
             if is_html:
-                description_text = parseGuardianDescription(description_text)
+                description = parseGuardianDescription(description)
                 
             items.append({
-                "title": title_text,
-                "link": link_text,
-                "description": description_text,
-                "source": source  
+                "title": title,
+                "link": link,
+                "description": description,
+                "source": source, 
+                "thumbnail": img_link
             })
     
     return items
+
 
 def main():
     feeds = [
@@ -79,6 +93,7 @@ def main():
         if not articles:
             print(f"Skipping feed {feed['url']} due to errors.")
         all_articles.extend(articles)
+        print(all_articles)
     
     with open("rss_feed.json", "w") as file:
         json.dump(all_articles, file, indent=4)

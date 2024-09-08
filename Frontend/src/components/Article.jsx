@@ -5,7 +5,8 @@ import bookmark from "../assets/img/bookmark.svg";
 import bookmarked from "../assets/img/bookmarked.svg";
 
 
-const Article = ({ title, description, link, source }) => {
+
+const Article = ({ title, description, link, source,thumbnail }) => {
   const [isBookmark, setIsBookmark] = useState(false);
   const [isTruncated, setIsTruncated] = useState(true); // State for truncation
 
@@ -55,6 +56,8 @@ const Article = ({ title, description, link, source }) => {
     }
   };
 
+  
+
   return (
     <div className="article-container">
       <div className="article">
@@ -63,7 +66,7 @@ const Article = ({ title, description, link, source }) => {
        
             {/* <img src={getLogoUrl(source)} alt={source}width={100} className="article-logo" /> */}
             <div className="img-container">
-              <img src={samplecard} />
+              <img src={thumbnail} />
             </div>
             <div className="article-text">
               <h3>{title}</h3>
