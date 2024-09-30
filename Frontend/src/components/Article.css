@@ -10,7 +10,8 @@
 .article-container {
   display: flex;
   justify-content: center;
-  height: 400px;
+  /* height: 400px; */
+  min-height: 400px; 
   width: 300px;
 }
 
