@@ -7,7 +7,8 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "$(shell tput setaf 6)%-10s$(shell tput sgr0) %s\n", $$1, $$2}'
 
 install: $(BACKEND_DEPS) $(FRONTEND_DEPS) ## Install frontend and backend dependencies
-	@echo "All dependencies installed. Run 'make run' to start the project."
+	@echo
+	@echo " 🚀 All dependencies installed. Run 'make run' to start the project."
 
 # Install backend deps and mark them installed.
 $(BACKEND_DEPS): backend/requirements.txt
