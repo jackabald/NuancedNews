@@ -1,16 +1,20 @@
-from flask import Flask, jsonify, request
-from article_summarise import scrape_and_summarize
-from flask_cors import CORS
 import json
+
+from flask import Flask, jsonify, request
+
+# from article_summarise import scrape_and_summarize
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/news', methods=['GET'])
+
+@app.route("/api/news", methods=["GET"])
 def get_news():
-    with open('rss_feed.json', 'r') as file:
+    with open("rss_feed.json", "r") as file:
         data = json.load(file)
     return jsonify(data)
+
 
 # @app.route('api/save', methods['POST'])
 # def save_to_firestore():
@@ -21,13 +25,13 @@ def get_news():
 #         return jsonify({"success": True}), 200
 #     except Exception as e:
 #         return f"An Error Occurred {e}", 400
-    
-@app.route('/summarize', methods=['POST'])
-def summarize():
-    data = request.json
-    url = data['url']
-    summary = scrape_and_summarize(url)
-    return jsonify({'summary': summary})
+
+# @app.route('/summarize', methods=['POST'])
+# def summarize():
+#     data = request.json
+#     url = data['url']
+#     summary = scrape_and_summarize(url)
+#     return jsonify({'summary': summary})
 
 if __name__ == "__main__":
     app.run(debug=True)
