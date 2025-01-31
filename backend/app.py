@@ -24,6 +24,12 @@ with app.app_context():
     print("Running RSS Parser")
     rss_parser()
 
+
+@app.get("/api/health")
+def get_health():
+    return jsonify({"status": "ok"})
+
+
 # @app.route("/api/news", methods=["GET"])
 # def get_news():
 #     with open("rss_feed.json", "r") as file:
