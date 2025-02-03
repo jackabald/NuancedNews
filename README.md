@@ -24,6 +24,12 @@ Large news publications post their .rss files, which are XML files that contain 
 * Firebase (User Auth)
 
 ## Installation and Setup
+### MAKEFILE
+  A makefile has been added. Now you can run the code by simply using:
+```bash
+make install
+make run
+```
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/jackabald/NuancedNews.git
