@@ -22,7 +22,7 @@ $(FRONTEND_DEPS): frontend/package.json
 	cd frontend && npm install
 	touch $@
 
-run: ## Run frontend and backend dev servers
+run: install ## Run frontend and backend dev servers
 	(cd backend && exec venv/bin/python app.py) &
 	cd frontend && exec npm run dev
 
