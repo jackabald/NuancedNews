@@ -93,7 +93,7 @@ def main():
         if not articles:
             print(f"Skipping feed {feed['url']} due to errors.")
         all_articles.extend(articles)
-        print(all_articles)
+        # print(all_articles)
     
     with open("rss_feed.json", "w") as file:
         json.dump(all_articles, file, indent=4)

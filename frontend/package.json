@@ -13,6 +13,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "caniuse-lite": "^1.0.30001697",
     "cheerio": "^1.0.0",
     "firebase": "^10.12.5",
     "jquery": "^3.7.1",
