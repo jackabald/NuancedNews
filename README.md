@@ -30,6 +30,10 @@ Large news publications post their .rss files, which are XML files that contain 
 make install
 make run
 ```
+  Make sure you run rss_parser.py to populate the JSON before starting the server. 
+```bash
+python rss_parser.py
+```
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/jackabald/NuancedNews.git
