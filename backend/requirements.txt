@@ -1,8 +1,10 @@
 flask
 flask_cors
-jsonify
 requests
+beautifulsoup4
 bs4
 transformers
 torch
-beautifulsoup4
+aiohttp>=3.8.0
+lxml>=4.9.0
+typing-extensions>=4.0.0

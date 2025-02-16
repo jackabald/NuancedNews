@@ -22,7 +22,7 @@ with app.app_context():
     # db = firestore.Client()
 
     print("Running RSS Parser")
-    # rss_parser()
+    rss_parser()
 
 
 @app.get("/api/health")
