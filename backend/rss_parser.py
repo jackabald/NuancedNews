@@ -1,6 +1,6 @@
+import json
 import aiohttp
 import asyncio
-import json
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from typing import List, Dict, Optional
@@ -11,21 +11,18 @@ from functools import partial
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Function to fetch RSS feed content
 async def fetch_rss(session: aiohttp.ClientSession, url: str) -> Optional[str]:
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
+        headers = {'User-Agent': 'Mozilla/5.0'}
         async with session.get(url, headers=headers, timeout=30) as response:
             response.raise_for_status()
             return await response.text()
-    except aiohttp.ClientError as e:
+    except Exception as e:
         logger.error(f"Error fetching {url}: {e}")
         return None
-    except Exception as e:
-        logger.error(f"Unexpected error fetching {url}: {e}")
-        return None
 
+# Function to parse XML content
 def parse_xml(content: str) -> Optional[ET.Element]:
     try:
         return ET.fromstring(content)
@@ -33,46 +30,128 @@ def parse_xml(content: str) -> Optional[ET.Element]:
         logger.error(f"Error parsing XML: {e}")
         return None
 
-def parse_description(description: str, is_html: bool) -> str:
-    if is_html:
-        soup = BeautifulSoup(description, "lxml")  # Removed parser argument
-        return soup.get_text(" ", strip=True)
-    return description
-
-def extract_images(content: str) -> list:
-    soup = BeautifulSoup(content, "lxml")  # Removed parser argument
+# Function to extract images from HTML content
+def extract_images(content: str) -> List[str]:
+    soup = BeautifulSoup(content, "lxml")
     return [img['src'] for img in soup.find_all('img') if 'src' in img.attrs]
 
-def process_item(item: ET.Element, source: str, is_html: bool) -> Dict:
+# Function to extract media image from various sources
+def extract_media_image(item: ET.Element) -> Optional[str]:
+    namespaces = {'media': 'http://search.yahoo.com/mrss/'}
+
+    # 1. Check <media:group> for <media:content>
+    media_group = item.find(".//media:group", namespaces=namespaces)
+    if media_group is not None:
+        media_content = media_group.find(".//media:content", namespaces=namespaces)
+        if media_content is not None and 'url' in media_content.attrib:
+            return media_content.attrib['url']
+
+    # 2. Check for <media:content> directly
+    media_content = item.find(".//media:content", namespaces=namespaces)
+    if media_content is not None and 'url' in media_content.attrib:
+        return media_content.attrib['url']
+
+    # 3. Check for <media:thumbnail>
+    media_thumbnail = item.find(".//media:thumbnail", namespaces=namespaces)
+    if media_thumbnail is not None and 'url' in media_thumbnail.attrib:
+        return media_thumbnail.attrib['url']
+
+    return None
+
+async def fetch_image_link(session: aiohttp.ClientSession, url: str) -> Optional[str]:
+    """Scrapes an image from the webpage as a last resort."""
+    def switch_class_based_on_url(url):
+        class_mapping = {
+            'https://thegrayzone.com': 'hero'
+        }
+        for key in class_mapping:
+            if url.startswith(key):
+                return class_mapping[key]
+        return 'DefaultClass'
+
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        async with session.get(url, headers=headers, timeout=30) as response:
+            if response.status != 200:
+                return None
+            html = await response.text()
+
+        soup = BeautifulSoup(html, 'html.parser')
+        class_name = switch_class_based_on_url(url)
+        hero_section = soup.find(class_=class_name)
+
+        if hero_section:
+            img_tag = hero_section.find('img')
+            if img_tag and 'src' in img_tag.attrs:
+                return img_tag['src']
+
+        return None  # No image found
+    except Exception as e:
+        logger.error(f"Error scraping image from {url}: {e}")
+        return None
+
+# Function to remove HTML tags from a string
+def remove_html_tags(text: str) -> str:
+    soup = BeautifulSoup(text, "html.parser")
+    return soup.get_text()
+
+# Function to process each RSS item
+async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: str, session: aiohttp.ClientSession) -> Optional[Dict]:
     try:
         title = item.findtext("title", default="No Title")
         link = item.findtext("link", default="")
         description = item.findtext("description", default="")
         content_encoded = item.find("{http://purl.org/rss/1.0/modules/content/}encoded")
-        enclosure = item.find("enclosure")
-
+        logo = logo_url
         if not link:
             return None
 
-        # Extract images
-        img_links = (extract_images(content_encoded.text) if content_encoded is not None and content_encoded.text 
-                    else [enclosure.get('url')] if enclosure is not None else [])
-        
+        # Clean the description by removing HTML tags
+        clean_description = remove_html_tags(description)
+
+        # Extract media images
+        img_links = []
+        media_image_url = extract_media_image(item)
+        if media_image_url:
+            img_links.append(media_image_url)
+
+        # 4. Check for <enclosure> if no media images found
+        enclosure = item.find("enclosure")
+        if enclosure is not None and 'url' in enclosure.attrib:
+            img_links.append(enclosure.attrib['url'])
+
+        # 5. Extract images from HTML content if available
+        if not img_links and content_encoded is not None and content_encoded.text:
+            img_links.extend(extract_images(content_encoded.text))
+
+        # 6. Fallback to scraping if no image found
+        if not img_links:
+            scraped_image = await fetch_image_link(session, link)
+            if scraped_image:
+                img_links.append(scraped_image)
+
+        # 7. Fallback to logo URL if still no images found
+        thumbnail = img_links[0] if img_links else logo_url
+
         return {
             "title": title,
             "link": link,
-            "description": parse_description(description, is_html),
+            "description": clean_description,  # Use cleaned description
             "source": source,
-            "thumbnail": img_links[0] if img_links else ""
+            "thumbnail": thumbnail,
+            "logo": logo
         }
     except Exception as e:
         logger.error(f"Error processing item: {e}")
         return None
 
+# Function to process the RSS feed
 async def process_feed(session: aiohttp.ClientSession, feed_config: Dict) -> List[Dict]:
-    url, is_html = feed_config["url"], feed_config["is_html"]
+    url = feed_config["url"]
+    is_html = feed_config.get("is_html", False)
+    logo_url = feed_config.get("logo", "")
+
     content = await fetch_rss(session, url)
-    
     if not content:
         return []
 
@@ -81,52 +160,36 @@ async def process_feed(session: aiohttp.ClientSession, feed_config: Dict) -> Lis
         return []
 
     source = feed.findtext(".//channel/title", default="Unknown Source")
-    
-    # Process items in parallel using ThreadPoolExecutor
-    with ThreadPoolExecutor() as executor:
-        process_func = partial(process_item, source=source, is_html=is_html)
-        items = list(executor.map(process_func, feed.findall(".//item")))
-    
-    return [item for item in items if item is not None]
 
-async def main():
-    feeds = [
-        {"url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml", "is_html": False},
-        {"url": "https://feeds.a.dj.com/rss/RSSOpinion.xml", "is_html": False},
-        {"url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "is_html": False},
-        {"url": "http://rss.cnn.com/rss/edition_world.rss", "is_html": False},
-        {"url": "http://rss.cnn.com/rss/cnn_allpolitics.rss", "is_html": False},
-        {"url": "http://rss.cnn.com/rss/cnn_latest.rss", "is_html": False},
-        {"url": "https://moxie.foxnews.com/google-publisher/world.xml", "is_html": False},
-        {"url": "https://moxie.foxnews.com/google-publisher/politics.xml", "is_html": False},
-        {"url": "https://nypost.com/world-news/feed/", "is_html": False},
-        {"url": "https://nypost.com/politics/feed/", "is_html": False},
-        {"url": "https://www.theguardian.com/world/rss", "is_html": True},
-        {"url": "https://www.theguardian.com/politics/rss", "is_html": True},
-        {"url": "https://feeds.npr.org/1001/rss.xml", "is_html": False},
-        {"url": "https://feeds.bbci.co.uk/news/world/rss.xml", "is_html": False},
-        {"url": "https://www.dailywire.com/feeds/rss.xml", "is_html": False},
-        {"url": "https://www.newyorker.com/feed/news", "is_html": False},
-        {"url": "https://thegrayzone.com/feed/", "is_html": True},
-        {"url": "https://www.washingtonexaminer.com/section/news/feed", "is_html": False},
+    # Process items using asyncio to support async scraping
+    tasks = [
+        process_item(item, source, is_html, logo_url, session)
+        for item in feed.findall(".//item")
     ]
-    
-    # Configure client session with longer timeout
+    results = await asyncio.gather(*tasks)
+
+    return [item for item in results if item is not None]
+
+# Main function to load feeds and process them
+async def main():
+    with open("feeds_name.json", "r") as f:
+        feeds = json.load(f)
+
     timeout = aiohttp.ClientTimeout(total=60)
-    connector = aiohttp.TCPConnector(limit=10)  # Limit concurrent connections
+    connector = aiohttp.TCPConnector(limit=10)
     
     async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-        tasks = [process_feed(session, feed) for feed in feeds]
+        tasks = [process_feed(session, feed) for feed in feeds.values()]
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         all_articles = []
         for result in results:
             if isinstance(result, Exception):
                 logger.error(f"Feed processing error: {result}")
                 continue
             all_articles.extend(result)
-    
-    with open("rss_feed.json", "w") as file:
+
+    with open("rss_feed.json", "w", encoding="utf-8") as file:
         json.dump(all_articles, file, indent=4)
 
 if __name__ == "__main__":

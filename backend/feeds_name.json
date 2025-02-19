@@ -1,0 +1,74 @@
+{
+    "World | WSJ": {
+        "url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
+        "logo": "https://logo.clearbit.com/wsj.com"
+    },
+    "Opinion | WSJ": {
+        "url": "https://feeds.a.dj.com/rss/RSSOpinion.xml",
+        "logo": "https://logo.clearbit.com/wsj.com"
+    },
+    "World | NYT": {
+        "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+        "logo": "https://logo.clearbit.com/nytimes.com"
+    },
+    "World | CNN": {
+        "url": "http://rss.cnn.com/rss/edition_world.rss",
+        "logo": "https://logo.clearbit.com/cnn.com"
+    },
+    "Politics | CNN": {
+        "url": "http://rss.cnn.com/rss/cnn_allpolitics.rss",
+        "logo": "https://logo.clearbit.com/cnn.com"
+    },
+    "Latest | CNN": {
+        "url": "http://rss.cnn.com/rss/cnn_latest.rss",
+        "logo": "https://logo.clearbit.com/cnn.com"
+    },
+    "World | Fox News": {
+        "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+        "logo": "https://logo.clearbit.com/foxnews.com"
+    },
+    "Politics | Fox News": {
+        "url": "https://moxie.foxnews.com/google-publisher/politics.xml",
+        "logo": "https://logo.clearbit.com/foxnews.com"
+    },
+    "World | NY Post": {
+        "url": "https://nypost.com/world-news/feed/",
+        "logo": "https://logo.clearbit.com/nypost.com"
+    },
+    "Politics | NY Post": {
+        "url": "https://nypost.com/politics/feed/",
+        "logo": "https://logo.clearbit.com/nypost.com"
+    },
+    "World | Guardian": {
+        "url": "https://www.theguardian.com/world/rss",
+        "logo": "https://logo.clearbit.com/theguardian.com"
+    },
+    "Politics | Guardian": {
+        "url": "https://www.theguardian.com/politics/rss",
+        "logo": "https://logo.clearbit.com/theguardian.com"
+    },
+    "World | NPR": {
+        "url": "https://feeds.npr.org/1001/rss.xml",
+        "logo": "https://logo.clearbit.com/npr.org"
+    },
+    "World | BBC": {
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "logo": "https://logo.clearbit.com/bbc.com"
+    },
+    "News | Daily Wire": {
+        "url": "https://www.dailywire.com/feeds/rss.xml",
+        "logo": "https://logo.clearbit.com/dailywire.com"
+    },
+    "News | New Yorker": {
+        "url": "https://www.newyorker.com/feed/news",
+        "logo": "https://logo.clearbit.com/newyorker.com"
+    },
+    "News | Grayzone": {
+        "url": "https://thegrayzone.com/feed/",
+        "logo": "https://logo.clearbit.com/thegrayzone.com"
+    },
+    "News | Washington Examiner": {
+        "url": "https://www.washingtonexaminer.com/section/news/feed",
+        "logo": "https://logo.clearbit.com/washingtonexaminer.com"
+    }
+}
