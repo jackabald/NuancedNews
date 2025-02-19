@@ -21,7 +21,7 @@ function App() {
       try {
         const data = await fetchNews();
         setNews(data);
-        console.log(data)
+      
       } catch (error) {
         console.error("Error fetching news:", error);
       }

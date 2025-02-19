@@ -90,6 +90,11 @@ async def fetch_image_link(session: aiohttp.ClientSession, url: str) -> Optional
         logger.error(f"Error scraping image from {url}: {e}")
         return None
 
+# Function to remove HTML tags from a string
+def remove_html_tags(text: str) -> str:
+    soup = BeautifulSoup(text, "html.parser")
+    return soup.get_text()
+
 # Function to process each RSS item
 async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: str, session: aiohttp.ClientSession) -> Optional[Dict]:
     try:
@@ -100,6 +105,9 @@ async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: s
         logo = logo_url
         if not link:
             return None
+
+        # Clean the description by removing HTML tags
+        clean_description = remove_html_tags(description)
 
         # Extract media images
         img_links = []
@@ -128,10 +136,10 @@ async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: s
         return {
             "title": title,
             "link": link,
-            "description": description,
+            "description": clean_description,  # Use cleaned description
             "source": source,
             "thumbnail": thumbnail,
-            "logo":logo
+            "logo": logo
         }
     except Exception as e:
         logger.error(f"Error processing item: {e}")

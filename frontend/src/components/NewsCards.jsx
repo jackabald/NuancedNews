@@ -7,10 +7,10 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 
 const NewsCards = ({ news }) => {
     const groupedNews = groupNewsBySource(news);
-console.log(groupedNews)
     return (
         <Container fluid>
             <Row>
+                {console.log(groupedNews)}
                 {Object.entries(groupedNews).map(([source, { articles, logo }]) => (
                     <Col md={6} key={source} className="news-column">
                         <div className="news-section">
@@ -36,4 +36,5 @@ console.log(groupedNews)
         </Container>
     );
 };
+
 export default NewsCards
