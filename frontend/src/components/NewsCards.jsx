@@ -15,7 +15,15 @@ const NewsCards = ({ news }) => {
                     <Col md={6} key={source} className="news-column">
                         <div className="news-section">
                             <div className="logo-container">
-                                <img src={logo || "src/assets/img/default.png"} height= {300} width={300} alt={source} />
+                                {console.log(source)}
+                                <img
+                                    src={`/assets/logos/${source.replace(/[^a-zA-Z0-9_-]/g, "_")}.png`}
+                                    onError={e => e.target.src = "/assets/img/default.png"}
+                                    height={300}
+                                    width={300}
+                                    alt={source}
+                                />
+
                             </div>
                             <div className="news-content">
                                 <h2>{source}</h2>
