@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Article from "./Article";
 import "./Carousel.css";
 import { groupNewsBySource } from "./utils";
@@ -9,7 +9,7 @@ const Carousel = ({ news }) => {
 
   // Memoize groupedNews to avoid recalculating unless news changes
   const groupedNews = useMemo(() => groupNewsBySource(news), [news]);
-
+console.log(groupedNews)
   // Function to render articles for each source to avoid repetition
   const renderArticles = (sourceKey) => (
     <div className="slides-wrapper">

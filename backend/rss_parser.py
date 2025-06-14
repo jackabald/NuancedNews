@@ -59,7 +59,6 @@ def extract_media_image(item: ET.Element) -> Optional[str]:
     return None
 
 async def fetch_image_link(session: aiohttp.ClientSession, url: str) -> Optional[str]:
-    """Scrapes an image from the webpage as a last resort."""
     def switch_class_based_on_url(url):
         class_mapping = {
             'https://thegrayzone.com': 'hero'
@@ -85,17 +84,16 @@ async def fetch_image_link(session: aiohttp.ClientSession, url: str) -> Optional
             if img_tag and 'src' in img_tag.attrs:
                 return img_tag['src']
 
-        return None  # No image found
+        return None
     except Exception as e:
         logger.error(f"Error scraping image from {url}: {e}")
         return None
 
-# Function to remove HTML tags from a string
 def remove_html_tags(text: str) -> str:
     soup = BeautifulSoup(text, "html.parser")
     return soup.get_text()
 
-# Function to process each RSS item
+# Process each RSS item
 async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: str, session: aiohttp.ClientSession) -> Optional[Dict]:
     try:
         title = item.findtext("title", default="No Title")
@@ -106,37 +104,31 @@ async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: s
         if not link:
             return None
 
-        # Clean the description by removing HTML tags
         clean_description = remove_html_tags(description)
 
-        # Extract media images
         img_links = []
         media_image_url = extract_media_image(item)
         if media_image_url:
             img_links.append(media_image_url)
 
-        # 4. Check for <enclosure> if no media images found
         enclosure = item.find("enclosure")
         if enclosure is not None and 'url' in enclosure.attrib:
             img_links.append(enclosure.attrib['url'])
 
-        # 5. Extract images from HTML content if available
         if not img_links and content_encoded is not None and content_encoded.text:
             img_links.extend(extract_images(content_encoded.text))
 
-        # 6. Fallback to scraping if no image found
         if not img_links:
             scraped_image = await fetch_image_link(session, link)
             if scraped_image:
                 img_links.append(scraped_image)
 
-        # 7. Fallback to logo URL if still no images found
         thumbnail = img_links[0] if img_links else logo_url
 
         return {
             "title": title,
             "link": link,
-            "description": clean_description,  # Use cleaned description
+            "description": clean_description,
             "source": source,
             "thumbnail": thumbnail,
             "logo": logo
@@ -145,8 +137,8 @@ async def process_item(item: ET.Element, source: str, is_html: bool, logo_url: s
         logger.error(f"Error processing item: {e}")
         return None
 
-# Function to process the RSS feed
-async def process_feed(session: aiohttp.ClientSession, feed_config: Dict) -> List[Dict]:
+# Process each RSS feed
+async def process_feed(session: aiohttp.ClientSession, source_name: str, feed_config: Dict) -> List[Dict]:
     url = feed_config["url"]
     is_html = feed_config.get("is_html", False)
     logo_url = feed_config.get("logo", "")
@@ -159,9 +151,8 @@ async def process_feed(session: aiohttp.ClientSession, feed_config: Dict) -> Lis
     if feed is None:
         return []
 
-    source = feed.findtext(".//channel/title", default="Unknown Source")
+    source = source_name  # Use key from JSON as source
 
-    # Process items using asyncio to support async scraping
     tasks = [
         process_item(item, source, is_html, logo_url, session)
         for item in feed.findall(".//item")
@@ -170,16 +161,15 @@ async def process_feed(session: aiohttp.ClientSession, feed_config: Dict) -> Lis
 
     return [item for item in results if item is not None]
 
-# Main function to load feeds and process them
+# Main function
 async def main():
     with open("feeds_name.json", "r") as f:
         feeds = json.load(f)
 
     timeout = aiohttp.ClientTimeout(total=60)
     connector = aiohttp.TCPConnector(limit=10)
-    
     async with aiohttp.ClientSession(timeout=timeout, connector=connector) as session:
-        tasks = [process_feed(session, feed) for feed in feeds.values()]
+        tasks = [process_feed(session, feed_name, feed) for feed_name, feed in feeds.items()]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         all_articles = []
