@@ -12,6 +12,8 @@ import More from "./components/More";
 import WhySection from "./components/WhySection";
 import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
+import Bookmarked from "./components/Bookmarked.jsx";
+import { BookmarkProvider } from "./contexts/BookmarkedContext.jsx";
 function App() {
   const [news, setNews] = useState([]);
 
@@ -32,6 +34,7 @@ function App() {
 
   return (
     <AuthProvider>
+        <BookmarkProvider>
       <Router>
         <div className="app">
           <Navbar />
@@ -49,10 +52,12 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile-details" element={<ProfileDetails />} />
             <Route path="/more" element={<More news={news} />} />
+          <Route path="/bookmarked" element={<Bookmarked />} />
           </Routes>
           <Footer />
         </div>
       </Router>
+      </BookmarkProvider>
     </AuthProvider>
   );
 }
