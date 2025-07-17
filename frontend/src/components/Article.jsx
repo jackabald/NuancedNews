@@ -1,117 +1,148 @@
-import React, { useState } from "react";
-import "./Article.css";
-import samplecard from "../assets/img/samplecard.png";
+import { useState } from "react";
 import bookmark from "../assets/img/bookmark.svg";
 import bookmarked from "../assets/img/bookmarked.svg";
 import { getSummary } from "../services/newsService";
+import { useBookmarks } from "../contexts/BookmarkedContext";
 
-
-
-const Article = ({ title, description, link, source,thumbnail }) => {
-  const [isBookmark, setIsBookmark] = useState(false);
+const Article = ({ title, description, link, source, thumbnail, onRemoveBookmark }) => {
+  const { bookmarks, toggleBookmark } = useBookmarks(); // ✅ use context
   const [summary, setSummary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
 
-  const handleClick = () => {
-    setIsBookmark(!isBookmark);
-  };
+  const isBookmarked = bookmarks.some((b) => b.link === link); // ✅ check if already bookmarked
 
-  const toggleTruncate = () => {
-    setIsTruncated(!isTruncated);
-  };
-
-  // const truncateDescription = (description, maxLength = 100) => {
-  //   if (description == null) {
-  //     return '';
-  //   }
-  //   if (isTruncated && description.length > maxLength) {
-  //     return (
-  //       <span>
-  //         {`${description.substring(0, maxLength)}...`}
-  //         <span onClick={toggleTruncate} style={{ color: 'blue', cursor: 'pointer' }}> Show More</span>
-  //       </span>
-  //     );
-  //   }
-  //   return (
-  //     <span>
-  //       {description}
-  //       {description.length > maxLength && (
-  //         <span onClick={toggleTruncate} style={{ color: 'blue', cursor: 'pointer' }}> Show less</span>
-  //       )}
-  //     </span>
-  //   );
-  // };
-
-
-  const getLogoUrl = (source) => {
-    switch (source) {
-      case "CNN":
-        return "https://upload.wikimedia.org/wikipedia/commons/b/b1/CNN.svg";
-      case "NYT":
-        return "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg";
-      case "WSJ":
-        return "https://s.wsj.net/img/meta/wsj-social-share.png";
-      case "FOX":
-        return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Fox_News_Channel_logo.svg/1200px-Fox_News_Channel_logo.svg.png";
-      default:
-        return 0;
-    }
+  const handleToggleBookmark = () => {
+    toggleBookmark({ title, description, link, source, thumbnail });
   };
 
   const fetchSummary = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
-      const response = await getSummary(link); 
-      console.log("Fetched summary:", response); 
-
-      if (response && response) {
-        setSummary(response); 
-        console.log("Article component rendered with summary1:", summary);
-      } else {
-        setSummary("No summary available or an error occurred."); // Handle no summary case
-        console.log("Article component rendered with summary111:", summary);
-      }
+      const response = await getSummary(link);
+      setSummary(response || "No summary available.");
     } catch (error) {
-      console.error("Error fetching summary:", error); // Log error to console
-      setSummary("Error fetching summary: " + error.message); // Set error message
+      setSummary("Error fetching summary: " + error.message);
     } finally {
       setIsLoading(false);
+    }
   };
-  };
-  return (
-    <div className="article-container">
-      <div className="article">
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          <div className="article-content">
-       
-            {/* <img src={getLogoUrl(source)} alt={source}width={100} className="article-logo" /> */}
-            <div className="img-container">
-              <img src={thumbnail} />
-            </div>
-            <div className="article-text">
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </div>
 
-          </div>
-        </a>
-        <div className="article-footer">
-          <div className="showmore"><a href="#" className="showmore">Open Article</a></div>
-          <button type="button" onClick={fetchSummary} className="showmore">
-            {isLoading ? "Summarizing..." : "Summarize Article"}
-          </button>
-          <button
-            type="button"
-            onClick={handleClick}
-          ><img src={isBookmark? bookmarked : bookmark} width = {35} height ={35} alt="bookamrk"/></button>
-        </div>
-        {summary && (
-          <div className="summary">
-            <h4>Summary:</h4>
-            <p>{summary}</p>
+  const fallbackThumbnail =
+    "/logos/" + source.split(" | ").pop().trim().replace(/\s+/g, "_") + ".png";
+
+  const words = description.split(" ");
+  const isTruncated = words.length > 25;
+  const displayedText = showFullDescription
+    ? description
+    : words.slice(0, 25).join(" ") + (isTruncated ? "..." : "");
+
+  const handleRemove = () => {
+    if (window.confirm("Are you sure you want to remove this bookmark?")) {
+      onRemoveBookmark(link);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-xs bg-white rounded-lg shadow-sm p-2 mx-auto mb-3 hover:shadow transition flex flex-col h-full">
+      <a href={link} target="_blank" rel="noopener noreferrer" className="relative block">
+        {imgLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-md">
+            <svg
+              className="animate-spin h-6 w-6 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
           </div>
         )}
+        <img
+          src={thumbnail || fallbackThumbnail}
+          alt={title}
+          className={`w-full h-32 rounded-md mb-1.5 transition-opacity duration-300 ${
+            imgLoading ? "opacity-0" : "opacity-100"
+          } ${thumbnail ? "object-cover" : "object-contain"}`}
+          onLoad={() => setImgLoading(false)}
+          onError={() => setImgLoading(false)}
+        />
+        <h3 className="text-base font-semibold text-gray-800 leading-snug line-clamp-2">
+          {title}
+        </h3>
+      </a>
+
+      <p className="text-sm text-gray-700 leading-snug mt-0.5 mb-2 flex-grow">
+        {displayedText}
+        {isTruncated && (
+          <button
+            onClick={() => setShowFullDescription(!showFullDescription)}
+            className="ml-1 text-blue-600 hover:underline text-sm font-medium"
+          >
+            {showFullDescription ? "Show less" : "Read more"}
+          </button>
+        )}
+      </p>
+
+      <div className="flex items-center justify-between gap-1">
+        <button
+          onClick={fetchSummary}
+          className="flex-1 text-sm px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+        >
+          {isLoading ? "..." : "Summarize"}
+        </button>
+
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 text-sm text-center px-2 py-1 bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition"
+        >
+          Open
+        </a>
+
+        {onRemoveBookmark ? (
+          <button
+            onClick={handleRemove}
+            className="p-1 bg-red-100 rounded hover:bg-red-200 transition text-red-600 font-semibold"
+            title="Remove bookmark"
+          >
+            Remove
+          </button>
+        ) : (
+          <button
+            onClick={handleToggleBookmark}
+            className="p-1 bg-blue-100 rounded hover:bg-blue-200 transition"
+            title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+          >
+            <img
+              src={isBookmarked ? bookmarked : bookmark}
+              alt="bookmark"
+              className="w-5 h-5"
+            />
+          </button>
+        )}
       </div>
+
+      {summary && (
+        <div className="mt-2 bg-gray-50 border rounded p-2 text-sm text-gray-700">
+          <strong className="block mb-1">Summary:</strong>
+          {summary}
+        </div>
+      )}
     </div>
   );
 };

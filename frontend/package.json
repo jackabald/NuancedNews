@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.3",
     "caniuse-lite": "^1.0.30001697",
     "cheerio": "^1.0.0",
+    "color-thief-browser": "^2.0.2",
     "firebase": "^10.12.5",
     "jquery": "^3.7.1",
     "node-fetch": "^3.3.2",
