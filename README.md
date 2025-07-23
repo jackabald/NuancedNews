@@ -77,3 +77,15 @@ VITE_APP_ID=your_firebase_app_id
 ```bash
 npm run dev
 ```
+
+## Docker Setup
+
+### Prerequisites
+- Docker installed
+- Docker Compose installed
+
+### Running with Docker
+
+1. Build and run the containers:
+```bash
+docker-compose up --build
